@@ -2,7 +2,13 @@
 
 ##Introduction
 
-This is the github page for the LED Christmas Tree project shown in XXXXXXXXXXXXXX. Software is split into three sections
+This is the github page for the LED Christmas Tree project shown in XXXXXXXXXXXXXX. The LED Christmas Tree is a project that is inspired by the [LEDmas Tree] (http://www.hownottoengineer.com/projects/ledMAS.html). 
+
+Unlike the original LEDmas Tree, my version is significantly smaller and a bit cheaper.
+
+The "tree" is built from a sheet of acrylic glass and split into six levels (or bases) and have four strips of WS2812 LEDs on them.
+
+Software is split into three sections
 
 1. Android app, the application to allowo user to choose animation and choose when to play/stop music
 2. Raspberry Pi, the server that plays music using pygame, handles users input and mangage the microcontroller's animation
