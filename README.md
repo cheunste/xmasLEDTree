@@ -1,10 +1,12 @@
 # xmasLEDTree
 
-This is the software portion to the LED Christmas project shown in XXXXXXXXXXXXXX. Software is split into three sections
+##Introduction
 
-1. Android app
-2. Raspberry Pi
-3. PIC18F46K80 microcontroller
+This is the github page for the LED Christmas Tree project shown in XXXXXXXXXXXXXX. Software is split into three sections
+
+1. Android app, the application to allowo user to choose animation and choose when to play/stop music
+2. Raspberry Pi, the server that plays music using pygame, handles users input and mangage the microcontroller's animation
+3. PIC18F46K80 microcontroller, the microcontroller that lights up the WS2812 LED and performs a fourier analysis of the sound from the Raspberry Pi and lights up LEDs based on resulting fourier analysis.
 
 ##Dependencies and Other Notes
 
