@@ -4,9 +4,9 @@ WIP
 
 ##Table of Contents
 
-1. [Introduction](##Introduction)
-2. [How To Use](##How-To-Use)
-3. [Design Details and Changes](##Design-Details-and-changes)
+1. [Introduction](##introduction)
+2. [How To Use](##how-to-use)
+3. [Design Details and Changes](##design-details-and-changes)
 
 ##Introduction
 
