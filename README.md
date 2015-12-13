@@ -1,5 +1,8 @@
 # xmasLEDTree
 
+##Table of Contents
+1. [Introduction]("##Introduction")
+2. [How To Use  ]("##How To Use")
 ##Introduction
 
 This is the github page for the LED Christmas Tree project shown in XXXXXXXXXXXXXX. The LED Christmas Tree is a project that is inspired by the [LEDmas Tree by HNTE] (http://www.hownottoengineer.com/projects/ledMAS.html).
@@ -16,11 +19,18 @@ The entire project contains four separate parts
 
 The "tree" itself is built from acrylic glass, a pvc pipe and a block of wood. Each base (or level) of the "tree" is cut from a sheet of acrylic glass into six squares of various lengths each containing four strips of WS2812 LEDs hooked in series.
 
-Software is split into three sections
+##How To Use
 
-1. Android app, the application to allowo user to choose animation and choose when to play/stop music
-2. Raspberry Pi, the server that plays music using pygame, handles users input and mangage the microcontroller's animation
-3. PIC18F46K80 microcontroller, the microcontroller that lights up the WS2812 LED and performs a fourier analysis of the sound from the Raspberry Pi and lights up LEDs based on resulting fourier analysis.
+1. Clone repository '''git clone https://github.com/cheunste/xmasLEDTree'''
+2. Set up a static IP address for the raspberry pi. Make sure port 9000 is not in use. You can change the port, if you want.
+3. Load music onto the raspberry pi and in the musicManager.py file located in the piServer folder, set the musicPath varible to your music directory.
+4. Open up android studio, and open up the LEDTreeApp project. In the MainActivity.java file, set address variable in the doInBackground() method to the IP address of the raspberry pi. If you changed the port in step 3. you need to change the port as well.
+5. Build the LEDTreeApp project and load the apk file to your android device.
+
+6. Open up MPLAB and load the LEDController.X project.
+7. Flash the pic18f microcontroller.
+8. Construct the circuit shown in Schematic 1.
+9. Hook up the connection for the raspberry pi to the microcontroller circuit shown in Schematic 1.
 
 ##Dependencies and Other Notes
 
