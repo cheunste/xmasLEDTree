@@ -2,9 +2,11 @@
 
 WIP
 
-**Table of Contents**
+##Table of Contents
+
 1. [Introduction](##Introduction)
-2. [How To Use](##How To Use)
+2. [How To Use](##How-To-Use)
+3. [Design Details and Changes](##Design-Details-and-changes)
 
 ##Introduction
 
@@ -24,7 +26,12 @@ The "tree" itself is built from acrylic glass, a pvc pipe and a block of wood. E
 
 ##How To Use
 
-1. Clone repository '''git clone https://github.com/cheunste/xmasLEDTree'''
+1. Clone repository 
+    
+'''
+git clone https://github.com/cheunste/xmasLEDTree
+'''
+
 2. Set up a static IP address for the raspberry pi. Make sure port 9000 is not in use. You can change the port, if you want.
 3. Load music onto the raspberry pi and in the musicManager.py file located in the piServer folder, set the musicPath varible to your music directory.
 4. Open up android studio, and open up the LEDTreeApp project. In the MainActivity.java file, set address variable in the doInBackground() method to the IP address of the raspberry pi. If you changed the port in step 3. you need to change the port as well.
@@ -35,7 +42,7 @@ The "tree" itself is built from acrylic glass, a pvc pipe and a block of wood. E
 8. Construct the circuit shown in Schematic 1.
 9. Hook up the connection for the raspberry pi to the microcontroller circuit shown in Schematic 1.
 
-##Design and Design Changes
+##Design Details and Design Changes
 As mentioned earlier, this project is based off of HNTE's LEDmas Tree, but I wanted to play music at the same time (in HNTE's youtube video, it looks like the music is just added on). I decided to add a spectrum analyzer because I wanted a way to visualize sound. 
 
 The original design for this LED Christmas Tree allows a user to use an app to select music, send the music to the christmas tree and a microcontroller generates lights based on fourier analyzsis from the audio wave. However, this turned out to be significantly time consuming and cutbacks were made.
