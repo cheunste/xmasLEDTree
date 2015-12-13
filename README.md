@@ -1,8 +1,11 @@
 # xmasLEDTree
 
-##Table of Contents
-1. [Introduction]("##Introduction")
-2. [How To Use  ]("##How To Use")
+WIP
+
+**Table of Contents**
+1. [Introduction](##Introduction)
+2. [How To Use](##How To Use)
+
 ##Introduction
 
 This is the github page for the LED Christmas Tree project shown in XXXXXXXXXXXXXX. The LED Christmas Tree is a project that is inspired by the [LEDmas Tree by HNTE] (http://www.hownottoengineer.com/projects/ledMAS.html).
