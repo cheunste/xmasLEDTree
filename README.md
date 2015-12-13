@@ -35,6 +35,21 @@ The "tree" itself is built from acrylic glass, a pvc pipe and a block of wood. E
 8. Construct the circuit shown in Schematic 1.
 9. Hook up the connection for the raspberry pi to the microcontroller circuit shown in Schematic 1.
 
+##Design and Design Changes
+As mentioned earlier, this project is based off of HNTE's LEDmas Tree, but I wanted to play music at the same time (in HNTE's youtube video, it looks like the music is just added on). I decided to add a spectrum analyzer because I wanted a way to visualize sound. 
+
+The original design for this LED Christmas Tree allows a user to use an app to select music, send the music to the christmas tree and a microcontroller generates lights based on fourier analyzsis from the audio wave. However, this turned out to be significantly time consuming and cutbacks were made.
+
+Originally, I wanted each LED Strip to be controlled individually by the microcontroller, however, this turned out to be impossible with a single PIC chip. The reason for this is because the WS2812 have incredibily strict timing and referencing pins takes time. 
+
+For example, If you have 24 separate strips of LED, and you need to generate a certain LED pattern on a certain strip, there needs to be some sort of decision statement (if-statements, case-switch, bitwise, etc.) to decide what strip to send to. If you have 24 cascaded if statements the earlier if statements can be referenced quicker than the latter if statements meaning LED strips in latter if statements will produce unexpected results due to timing. This is probably why in the many examples I looked at, there is only one pin that's a constant reference. However, I figured that using a simple if-else statment on a single port allows me to control two sets of LED strips without any issues.
+
+Although this could be solved by using multiple microcontrollers, I wanted my design to fit in a small box and I couldn't design the circuit with multiple micrcontrollers without going over the limits of the box. While this could be possible by using a PCB (Printed Circuit Board) due to storage reason, I could not make a PCB. As a compromise, I decided to hook up all the LEDs on a base in series. 
+
+In addition, since the PIC microcontroller handles both the LED lighting and performs the fourier analysis needed for the spectrum analyzer part, the LEDs in spectrum mode is slower than the music playing.
+
+The raspberry pi was originally going to be used as a middleman whose purpose is to take a music the user sends from the Android app (via bluetooth) and send it to the audio circuit. This was changed so that the music is stored on the raspberry pi itself and the user can not choose music and have limited control through the android app (only change animation, pause/play music). In addition, communication between the raspberry pi and android is now handled through HTTP. The main reason for this change is mostly because Android development in of itself is time consuming and in theory, would have took even longer than the micrcontroller itself.
+
 ##Dependencies and Other Notes
 
 Note this is still a work in progress
