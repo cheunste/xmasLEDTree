@@ -2,11 +2,19 @@
 
 ##Introduction
 
-This is the github page for the LED Christmas Tree project shown in XXXXXXXXXXXXXX. The LED Christmas Tree is a project that is inspired by the [LEDmas Tree] (http://www.hownottoengineer.com/projects/ledMAS.html). 
+This is the github page for the LED Christmas Tree project shown in XXXXXXXXXXXXXX. The LED Christmas Tree is a project that is inspired by the [LEDmas Tree by HNTE] (http://www.hownottoengineer.com/projects/ledMAS.html).
 
-Unlike the original LEDmas Tree, my version is significantly smaller and a bit cheaper.
+Unlike HNTE's  LEDmas Tree, this version is significantly smaller (hence a bit cheaper), play music, can be somewhat controlled by user via an android app and has a spectrum analyzer mode that lights up LEDs based on the music that's playing.
 
-The "tree" is built from a sheet of acrylic glass and split into six levels (or bases) and have four strips of WS2812 LEDs on them.
+The entire project contains four separate parts
+
+1. The "tree" itself, which contains all the LEDS and the acrylic glass.
+2. The raspberry pi, which is used to play music user have stored on it and receive command from the Android app.
+3. The audio amplifier and filter circuit, which is used to amplifier the sound wave from the raspberry pi and to limit frequency to 10kHz.
+4. The microcontroller circuit, used as both a spectrum analyzer and to light up LEDs.
+5. The Android app, used to give user some interaction such as playing/pause music or changing animation mode.
+
+The "tree" itself is built from acrylic glass, a pvc pipe and a block of wood. Each base (or level) of the "tree" is cut from a sheet of acrylic glass into six squares of various lengths each containing four strips of WS2812 LEDs hooked in series.
 
 Software is split into three sections
 
