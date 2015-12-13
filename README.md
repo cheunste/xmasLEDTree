@@ -2,11 +2,10 @@
 
 WIP
 
-##Table of Contents
 
 1. [Introduction](#introduction)
 2. [How To Use](#how-to-use)
-3. [Design Details and Changes](#design-details-and-changes)
+3. [Design Details and Design Changes](#design-details-and-design-changes)
 
 ##Introduction
 
@@ -55,7 +54,7 @@ Although this could be solved by using multiple microcontrollers, I wanted my de
 
 In addition, since the PIC microcontroller handles both the LED lighting and performs the fourier analysis needed for the spectrum analyzer part, the LEDs in spectrum mode is slower than the music playing.
 
-The raspberry pi was originally going to be used as a middleman whose purpose is to take a music the user sends from the Android app (via bluetooth) and send it to the audio circuit. This was changed so that the music is stored on the raspberry pi itself and the user can not choose music and have limited control through the android app (only change animation, pause/play music). In addition, communication between the raspberry pi and android is now handled through HTTP. The main reason for this change is because Android development is significantly time consuming and complex.
+The raspberry pi was originally going to be used as a middleman whose purpose is to take in an audio signal the user sends from the Android app (via bluetooth) and send it to the audio circuit. This was changed so that the music is stored on the raspberry pi itself and the user can not choose music and have limited control through the android app (only change animation, pause/play music). In addition, communication between the raspberry pi and android is now handled through HTTP and data is send in the form of JSON. The main reason for this change is because Android development is significantly time consuming and complex.
 
 ##Dependencies and Other Notes
 
