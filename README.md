@@ -4,9 +4,9 @@ WIP
 
 ##Table of Contents
 
-1. [Introduction](##introduction)
-2. [How To Use](##how-to-use)
-3. [Design Details and Changes](##design-details-and-changes)
+1. [Introduction](#introduction)
+2. [How To Use](#how-to-use)
+3. [Design Details and Changes](#design-details-and-changes)
 
 ##Introduction
 
@@ -71,7 +71,7 @@ Requires: [cherrypy] (http://www.cherrypy.org/), [pygame] (http://pygame.org/hif
 
 folderPath needs to be changed in the musicManager.py file to your music folder path on the rapsberry pi
 
-Start the server by performing "sudo python httpServer.py". Need to do this because of threading and GPIO usage requires sudo.
+Start the server by performing 'sudo python httpServer.py'. Need to do this because of threading and GPIO usage requires sudo.
 
 GPIO pins can be changed in the gpioManager file and GPIO pins use BCM notation. Refer to the following [post for more information] (http://raspberrypi.stackexchange.com/a/12967)
 
