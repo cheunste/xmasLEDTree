@@ -242,6 +242,5 @@ void fftMode(){
 	    // Draw a bar graph of the FFT output data
 	    TESTPIN_W6 = 1;
         writeLED(magnitudeArray);
-        __delay_ms(5);
 	    TESTPIN_W6 = 0;
 }
