@@ -1,26 +1,3 @@
-/************************************************************************
-	main.c
-
-    FFT Audio Analysis
-    Copyright (C) 2011 Simon Inns
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-	Email: simon.inns@gmail.com
-
-************************************************************************/
-
 #ifndef MAIN_C
 #define MAIN_C
 
@@ -121,12 +98,13 @@ void main(void)
                 else if (PORTCbits.RC6==1)randomLight();
                 else if (PORTCbits.RC7==1)ring();
                 //You should onlly get to the else statement below if 
-                //Spectrum is on...and no sound is on.
+                //None of the above is matched
                 else{
-                    for (int i=0; i<10;i++) randomLight();
-                    for (int i=0; i<10;i++) ring();
-                    for (int i=0; i<10;i++) redGreenStrips();
-                    for (int i=0; i<10;i++) redGreenLevels();                    
+                    randomLight();
+//                    for (int i=0; i<10;i++) randomLight();
+//                    for (int i=0; i<10;i++) ring();
+//                    for (int i=0; i<10;i++) redGreenStrips();
+//                    for (int i=0; i<10;i++) redGreenLevels();                    
                 }
             }
         }

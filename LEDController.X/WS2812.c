@@ -5,7 +5,7 @@
 #include <xc.h>
 
 //Used to perform delays between LED refresh. Too short, LEDs blink
-//Too long, then it wouldn't be real time
+//Too long, then it would be too slow
 void delayLED(){
 //    for(int i=0; i<50;i++)
 //        __delay_ms(1);
