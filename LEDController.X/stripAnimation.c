@@ -29,7 +29,7 @@
 //in the colorSelection method.
 //However, you can increase it if you want more ratio of green in the LED strips
 int maxColorChoices = 20;
-
+int lowColorChoices = 8;
 /*
  * This method selects a color based on the input sets it based on position of the ledArray
  * These technically isn't random, but a limited color assortment that are pleasent
@@ -211,7 +211,7 @@ void bounce(){
     
     //These random numbers uses 8 because I do not want a case where
     //it uses green.
-    randomNumber=floor(rand() / (RAND_MAX / (8+ 1) + 1));
+    randomNumber=floor(rand() / (RAND_MAX / lowColorChoices)+1);
     LEDonStrip=13;
     
     while(base6Tracker<LEDonStrip*3){
@@ -250,7 +250,7 @@ void ring(){
     //base 6
     //These random numbers uses 8 because I do not want a case where
     //it uses green.
-    randomNumber=floor(rand() / (RAND_MAX / (8+ 1) + 1));
+    randomNumber=floor(rand() / (RAND_MAX / lowColorChoices)+1);
     LEDonStrip=13;
     greenStrip(strip13,LEDonStrip*3);
     while(tracker<LEDonStrip*3){
@@ -272,7 +272,7 @@ void ring(){
     GIE=1; while(!GIE);
     
     //base 5
-    randomNumber=floor(rand() / (RAND_MAX / (8+ 1) + 1));
+    randomNumber=floor(rand() / (RAND_MAX / lowColorChoices)+1);
     LEDonStrip=13;
     greenStrip(strip13,LEDonStrip*3);
     tracker=0;
@@ -295,7 +295,7 @@ void ring(){
     GIE=1; while(!GIE);  
     
     //base 4
-    randomNumber=floor(rand() / (RAND_MAX / (8+ 1) + 1));
+    randomNumber=floor(rand() / (RAND_MAX/lowColorChoices)+1);
     LEDonStrip=10;
     greenStrip(strip10,LEDonStrip*3);
     tracker=0;
@@ -318,7 +318,7 @@ void ring(){
     GIE=1; while(!GIE);    
     
     //base 3
-    randomNumber=floor(rand() / (RAND_MAX / (8+ 1) + 1));
+    randomNumber=floor(rand() / (RAND_MAX/lowColorChoices)+1);
     LEDonStrip=8;
     greenStrip(strip8,LEDonStrip*3);
     tracker=0;
@@ -341,7 +341,7 @@ void ring(){
     GIE=1; while(!GIE);
     
     //base 2
-    randomNumber=floor(rand() / (RAND_MAX / (8+ 1) + 1));
+    randomNumber=floor(rand() / (RAND_MAX/lowColorChoices)+1);
     LEDonStrip=5;
     greenStrip(strip5,LEDonStrip*3);
     tracker=0;
@@ -364,7 +364,7 @@ void ring(){
     GIE=1; while(!GIE);
     
     //base 1
-    randomNumber=floor(rand() / (RAND_MAX / (8+ 1) + 1));
+    randomNumber=floor(rand() / (RAND_MAX/lowColorChoices)+1);
     LEDonStrip=4;
     greenStrip(strip4,LEDonStrip*3);
     tracker=0;

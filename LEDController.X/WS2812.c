@@ -13,7 +13,7 @@ void delayLED(){
 
 //This delay is used for animation methods. Can be as long as you want
 void delayLEDLong(){
-    for(int i=0; i<500;i++)
+    for(int i=0; i<10000;i++)
         __delay_ms(1);
     
 }
