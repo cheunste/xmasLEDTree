@@ -17,7 +17,9 @@ extern "C" {
 #define RES 6000
     
 //NOTE: bases with 10 or 13 LEDs need to be tired all in one at once
-//13LED
+//13LEDs, for Base 6
+unsigned char strip13B6[156]@0xDE0;
+//13LEDs, for Base 5 
 unsigned char strip13[156]@0x0d44;
 //10 LED
 unsigned char strip10[120]@0x0ccc;
