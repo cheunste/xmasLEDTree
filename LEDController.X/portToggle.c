@@ -623,12 +623,12 @@ void portSwitch(int bitVal,char port, int portNumber){
 //           else if(portNumber ==7) sendBitPB7( bitVal); 
    }
     else if(port=='C'){
-           if(portNumber ==0) sendBitPC0( bitVal); 
+           if(portNumber ==2 ) sendBitPC2( bitVal); 
            else{
-               sendBitPC1(bitVal);
+               sendBitPC3(bitVal);
            }
 //		   else if(portNumber ==1) sendBitPC1( bitVal); 
-//           else if(portNumber ==2) sendBitPC2( bitVal); 
+//           else if(portNumber ==2) sendBitPC2( bitVal)0; 
 //           else if(portNumber ==3) sendBitPC3( bitVal); 
 //           else if(portNumber ==4) sendBitPC4( bitVal); 
 //           else if(portNumber ==5) sendBitPC5( bitVal); 

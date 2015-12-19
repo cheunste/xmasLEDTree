@@ -57,7 +57,7 @@ void writeLED(long inputData[]){
 		//This takes care of counters 13 to 16
         else if(counter ==9){
             port='C';
-            portNumber=0;
+            portNumber=2;
             LEDonStrip=10;
             maxAmplitude =230.0;
             pushToLEDStrip(inputData[counter],inputData[counter+1],inputData[counter+2],inputData[counter+3],
@@ -67,7 +67,7 @@ void writeLED(long inputData[]){
 		//This takes care of counters 13 to 16
         else if(counter ==13){
             port='C';
-            portNumber=1;
+            portNumber=3;
             LEDonStrip=8;
             maxAmplitude = 185;
             pushToLEDStrip(inputData[counter],inputData[counter+1],inputData[counter+2],inputData[counter+3],

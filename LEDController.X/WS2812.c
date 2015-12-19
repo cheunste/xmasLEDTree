@@ -42,7 +42,7 @@ void pushToLEDArray(int LEDonStrip,double LEDratio, double LEDonToStripRatio,
     //This clears an array strip in decending order from the end of a strip to the start of the strip.
     //Note that this is in reverse order, so instead of GRB, it will be BRG
     for(i=arrayEnd; i>=arrayStart;i-=3){
-        ledArray[i] =25;
+        ledArray[i] =100;
         ledArray[i-1] =0;
         ledArray[i-2] =0;
         GIE=0; while(GIE);
@@ -54,9 +54,9 @@ void pushToLEDArray(int LEDonStrip,double LEDratio, double LEDonToStripRatio,
 	if(LEDonToStripRatio <=0.3){
 		//Make make LEDs cyan
 		for(i=arrayStart;i<arrayStart+correctedLEDRatio;i+=3){
-			ledArray[i] =25;
+			ledArray[i] =100;
 			ledArray[i+1] =0;
-			ledArray[i+2] =25;
+			ledArray[i+2] =100;
 			GIE=0; while(GIE);
             drawLED(ledArray,port,portNumber,LEDonStrip*4*3);
 //            delayLED();
@@ -65,7 +65,7 @@ void pushToLEDArray(int LEDonStrip,double LEDratio, double LEDonToStripRatio,
 
 		//Make rest of strip green
 		for(i=arrayStart+correctedLEDRatio; i<arrayEnd;i+=3){
-			ledArray[i] =25;
+			ledArray[i] =100;
 			ledArray[i+1] =0;
 			ledArray[i+2] =0;
 			GIE=0; while(GIE);
@@ -85,9 +85,9 @@ void pushToLEDArray(int LEDonStrip,double LEDratio, double LEDonToStripRatio,
         yellowUpperBorder=arrayStart+correctedLEDRatio;
 		//Make make LEDs cyan
 		for(i=arrayStart;i<cyanUpperBorder;i+=3){
-			ledArray[i] =25;
+			ledArray[i] =100;
 			ledArray[i+1] =0;
-			ledArray[i+2] =25;
+			ledArray[i+2] =100;
 			GIE=0; while(GIE);
             drawLED(ledArray,port,portNumber,LEDonStrip*4*3);
 //            delayLED();
@@ -96,8 +96,8 @@ void pushToLEDArray(int LEDonStrip,double LEDratio, double LEDonToStripRatio,
 
 		//make LEDs yellow
 		for(i=cyanUpperBorder;i<yellowUpperBorder;i+=3){
-			ledArray[i] =25;
-			ledArray[i+1] =25;
+			ledArray[i] =100;
+			ledArray[i+1] =100;
 			ledArray[i+2] =0;
 			GIE=0; while(GIE);
             drawLED(ledArray,port,portNumber,LEDonStrip*4*3);
@@ -106,7 +106,7 @@ void pushToLEDArray(int LEDonStrip,double LEDratio, double LEDonToStripRatio,
 		}
 		//Make rest of strip green
 		for(i=yellowUpperBorder; i<arrayEnd;i+=3){
-			ledArray[i] =25;
+			ledArray[i] =100;
 			ledArray[i+1] =0;
 			ledArray[i+2] =0;
 			GIE=0; while(GIE);
@@ -126,9 +126,9 @@ void pushToLEDArray(int LEDonStrip,double LEDratio, double LEDonToStripRatio,
         redEnd=yellowUpperBorder+correctedLEDRatio;
 		//Make make LEDs cyan
 		for(i=arrayStart;i<cyanUpperBorder;i+=3){
-			ledArray[i] =25;
+			ledArray[i] =100;
 			ledArray[i+1] = 0;
-			ledArray[i+2] =25;
+			ledArray[i+2] =100;
 			GIE=0; while(GIE);
             drawLED(ledArray,port,portNumber,LEDonStrip*4*3);
 //            delayLED();
@@ -136,8 +136,8 @@ void pushToLEDArray(int LEDonStrip,double LEDratio, double LEDonToStripRatio,
 		}
 		//make LEDs yellow
 		for(i=cyanUpperBorder;i<yellowUpperBorder;i+=3){
-			ledArray[i] =25;
-			ledArray[i+1] =25;
+			ledArray[i] =100;
+			ledArray[i+1] =100;
 			ledArray[i+2] =0;
 			GIE=0; while(GIE);
             drawLED(ledArray,port,portNumber,LEDonStrip*4*3);
@@ -147,7 +147,7 @@ void pushToLEDArray(int LEDonStrip,double LEDratio, double LEDonToStripRatio,
 		//Make make LEDs red
 		for(i=yellowUpperBorder;i<redEnd;i+=3){
 			ledArray[i] =0;
-			ledArray[i+1] =25;
+			ledArray[i+1] =100;
 			ledArray[i+2] =0;
 			GIE=0; while(GIE);
             drawLED(ledArray,port,portNumber,LEDonStrip*4*3);   
@@ -157,7 +157,7 @@ void pushToLEDArray(int LEDonStrip,double LEDratio, double LEDonToStripRatio,
 
         //Make rest green, if applicable
 		for(i=redEnd;i<arrayEnd;i+=3){
-			ledArray[i] =25;
+			ledArray[i] =100;
 			ledArray[i+1] = 0;
 			ledArray[i+2] = 0;
 			GIE=0; while(GIE);
@@ -255,7 +255,7 @@ void dimmerGreenStrip(unsigned char ledArray[],int LEDonStrip){
 
 void clearStrip(unsigned char ledArray[],int LEDonStrip)
 {
-    for (int i=0; i<LEDonStrip; i+=3)
+    for (int i=0; i<LEDonStrip*3; i+=3)
     {
         ledArray[i] =0;
         ledArray[i+1] =0;
@@ -267,49 +267,32 @@ void clearStrip(unsigned char ledArray[],int LEDonStrip)
 void clearAllLEDs(){
     
     int LEDonStrip;
-    //Base 6
+    //Base 6 and Base 5
     LEDonStrip=13;
     clearStrip(strip13,13*4);
-    GIE=0; while(GIE);
-    drawLED(strip13,'B',0,LEDonStrip*4*3);
-    GIE=1; while(!GIE);
-    delayLEDLong(); 
-
-    //Base 5
-    clearStrip(strip13,13*4);
-    GIE=0; while(GIE);
-    drawLED(strip13,'B',1,LEDonStrip*4*3);
-    GIE=1; while(!GIE);
-    delayLEDLong();     
 
     //Base 4
     LEDonStrip=10;
     clearStrip(strip10,10*4);
-    GIE=0; while(GIE);
-    drawLED(strip10,'C',0,LEDonStrip*4*3);
-    GIE=1; while(!GIE);
-    delayLEDLong(); 
 
     //Base 3
     LEDonStrip=8;
     clearStrip(strip8,8*4);
-    GIE=0; while(GIE);
-    drawLED(strip8,'C',1,LEDonStrip*4*3);
-    GIE=1; while(!GIE);
-    delayLEDLong();     
 
     //Base 2
     LEDonStrip=5;
     clearStrip(strip5,5*4);
-    GIE=0; while(GIE);
-    drawLED(strip5,'D',0,LEDonStrip*4*3);
-    GIE=1; while(!GIE);
-    delayLEDLong(); 
     
     //Base 1
     LEDonStrip=4;
     clearStrip(strip4,4*4);
+    
     GIE=0; while(GIE);
+    drawLED(strip13,'B',0,LEDonStrip*4*3);
+    drawLED(strip13,'B',1,LEDonStrip*4*3);
+    drawLED(strip10,'C',2,LEDonStrip*4*3);
+    drawLED(strip8,'C',3,LEDonStrip*4*3);
+    drawLED(strip5,'D',0,LEDonStrip*4*3);
     drawLED(strip4,'D',1,LEDonStrip*4*3);
     GIE=1; while(!GIE);
     delayLEDLong(); 
