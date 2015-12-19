@@ -250,13 +250,7 @@ void ring(){
     //base 6
     //These random numbers uses 8 because I do not want a case where
     //it uses green.
-<<<<<<< HEAD
     randomNumber=floor(rand() / (RAND_MAX / (minColorChoices+ 1) + 1));
-||||||| merged common ancestors
-    randomNumber=floor(rand() / (RAND_MAX / (8+ 1) + 1));
-=======
-    randomNumber=floor(rand() / (RAND_MAX / lowColorChoices)+1);
->>>>>>> master
     LEDonStrip=13;
     greenStrip(strip13B6,LEDonStrip*3);
     while(tracker<LEDonStrip*3){
@@ -278,13 +272,7 @@ void ring(){
     GIE=1; while(!GIE);
     
     //base 5
-<<<<<<< HEAD
     randomNumber=floor(rand() / (RAND_MAX / (minColorChoices+ 1) + 1));
-||||||| merged common ancestors
-    randomNumber=floor(rand() / (RAND_MAX / (8+ 1) + 1));
-=======
-    randomNumber=floor(rand() / (RAND_MAX / lowColorChoices)+1);
->>>>>>> master
     LEDonStrip=13;
     greenStrip(strip13B5,LEDonStrip*3);
     tracker=0;
@@ -307,13 +295,7 @@ void ring(){
     GIE=1; while(!GIE);  
     
     //base 4
-<<<<<<< HEAD
     randomNumber=floor(rand() / (RAND_MAX / (minColorChoices+ 1) + 1));
-||||||| merged common ancestors
-    randomNumber=floor(rand() / (RAND_MAX / (8+ 1) + 1));
-=======
-    randomNumber=floor(rand() / (RAND_MAX/lowColorChoices)+1);
->>>>>>> master
     LEDonStrip=10;
     greenStrip(strip10,LEDonStrip*3);
     tracker=0;
@@ -336,13 +318,7 @@ void ring(){
     GIE=1; while(!GIE);    
     
     //base 3
-<<<<<<< HEAD
     randomNumber=floor(rand() / (RAND_MAX / (minColorChoices+ 1) + 1));
-||||||| merged common ancestors
-    randomNumber=floor(rand() / (RAND_MAX / (8+ 1) + 1));
-=======
-    randomNumber=floor(rand() / (RAND_MAX/lowColorChoices)+1);
->>>>>>> master
     LEDonStrip=8;
     greenStrip(strip8,LEDonStrip*3);
     tracker=0;
@@ -365,13 +341,8 @@ void ring(){
     GIE=1; while(!GIE);
     
     //base 2
-<<<<<<< HEAD
+
     randomNumber=floor(rand() / (RAND_MAX / (minColorChoices+ 1) + 1));
-||||||| merged common ancestors
-    randomNumber=floor(rand() / (RAND_MAX / (8+ 1) + 1));
-=======
-    randomNumber=floor(rand() / (RAND_MAX/lowColorChoices)+1);
->>>>>>> master
     LEDonStrip=5;
     greenStrip(strip5,LEDonStrip*3);
     tracker=0;
@@ -394,13 +365,7 @@ void ring(){
     GIE=1; while(!GIE);
     
     //base 1
-<<<<<<< HEAD
     randomNumber=floor(rand() / (RAND_MAX / (minColorChoices+ 1) + 1));
-||||||| merged common ancestors
-    randomNumber=floor(rand() / (RAND_MAX / (8+ 1) + 1));
-=======
-    randomNumber=floor(rand() / (RAND_MAX/lowColorChoices)+1);
->>>>>>> master
     LEDonStrip=4;
     greenStrip(strip4,LEDonStrip*3);
     tracker=0;
