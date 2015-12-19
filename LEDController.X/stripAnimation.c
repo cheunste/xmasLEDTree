@@ -29,14 +29,7 @@
 //in the colorSelection method.
 //However, you can increase it if you want more ratio of green in the LED strips
 int maxColorChoices = 20;
-<<<<<<< HEAD
 int minColorChoices =7;
-
-||||||| merged common ancestors
-
-=======
-int lowColorChoices = 8;
->>>>>>> master
 /*
  * This method selects a color based on the input sets it based on position of the ledArray
  * These technically isn't random, but a limited color assortment that are pleasent
