@@ -25,6 +25,16 @@ void writeLED(long inputData[]){
  	for (unsigned char counter = 1; counter < 24; counter++)
 	{
         inputValue = inputData[counter];
+        
+        //This is the maxAmplitude gotten after taking abolute value of FFT. 
+        //This is only gotten from experimental
+        
+        double base6MaxAmplitude=300.0;
+        double base5MaxAmplitude=300.0;
+        double base4MaxAmplitude=230.0;
+        double base3MaxAmplitude=185.0;
+        double base2MaxAmplitude=115.0;
+        double base1MaxAmplitude=95.0;
         //port and portNumber are used to inform what port pin to send 
         //the led data array to in the ws2812.c file
 
@@ -39,7 +49,7 @@ void writeLED(long inputData[]){
             port='B';
             portNumber=0;
             LEDonStrip=13;
-            maxAmplitude = 300.0;
+            maxAmplitude = base6MaxAmplitude;
 			pushToLEDStrip(inputData[counter],inputData[counter+1],inputData[counter+2],inputData[counter+3],
                     LEDonStrip,maxAmplitude,port,portNumber,strip13);
         }
@@ -49,7 +59,7 @@ void writeLED(long inputData[]){
             port='B';
             portNumber=1;
             LEDonStrip=13;
-            maxAmplitude = 300.0;
+            maxAmplitude = base5MaxAmplitude;
             pushToLEDStrip(inputData[counter],inputData[counter+1],inputData[counter+2],inputData[counter+3],
                     LEDonStrip,maxAmplitude,port,portNumber,strip13);
         }
@@ -59,7 +69,7 @@ void writeLED(long inputData[]){
             port='C';
             portNumber=2;
             LEDonStrip=10;
-            maxAmplitude =230.0;
+            maxAmplitude =base4MaxAmplitude;
             pushToLEDStrip(inputData[counter],inputData[counter+1],inputData[counter+2],inputData[counter+3],
                     LEDonStrip,maxAmplitude,port,portNumber,strip10);
         }
@@ -69,7 +79,7 @@ void writeLED(long inputData[]){
             port='C';
             portNumber=3;
             LEDonStrip=8;
-            maxAmplitude = 185;
+            maxAmplitude = base3MaxAmplitude;
             pushToLEDStrip(inputData[counter],inputData[counter+1],inputData[counter+2],inputData[counter+3],
                     LEDonStrip,maxAmplitude,port,portNumber,strip8);
         }
@@ -79,7 +89,7 @@ void writeLED(long inputData[]){
             port='D';
             portNumber=0;
             LEDonStrip=5;
-            maxAmplitude = 115;
+            maxAmplitude = base2MaxAmplitude;
             pushToLEDStrip(inputData[counter],inputData[counter+1],inputData[counter+2],inputData[counter+3],
             LEDonStrip,maxAmplitude,port,portNumber,strip5);
         }
@@ -88,7 +98,7 @@ void writeLED(long inputData[]){
             port='D';
             portNumber=1;
             LEDonStrip=4;
-            maxAmplitude = 95;
+            maxAmplitude = base1MaxAmplitude;
             pushToLEDStrip(inputData[counter],inputData[counter+1],inputData[counter+2],inputData[counter+3],
             LEDonStrip,maxAmplitude,port,portNumber,strip4);
         }

@@ -181,7 +181,6 @@ void pushToLEDStrip(long input1,long input2,long input3,long input4,
 
 	//This is the maxAmplitude gotten after taking abolute value of FFT. This is only gotten from experimental
 	//results of looking at the aboluste value of fft at various frequencies. Really should be a parameter
-	//double maxAmplitude=300.0;
 
 	//These are ratios for each of the inputs compared to max Amplitude.
     //This determines how many LEDs are going to be on. 
