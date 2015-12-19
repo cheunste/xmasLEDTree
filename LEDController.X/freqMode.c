@@ -51,7 +51,7 @@ void writeLED(long inputData[]){
             LEDonStrip=13;
             maxAmplitude = base6MaxAmplitude;
 			pushToLEDStrip(inputData[counter],inputData[counter+1],inputData[counter+2],inputData[counter+3],
-                    LEDonStrip,maxAmplitude,port,portNumber,strip13);
+                    LEDonStrip,maxAmplitude,port,portNumber,strip13B6);
         }
 
 		//This takes care of coutners 5 to 8 as they all need to be on one array
@@ -61,7 +61,7 @@ void writeLED(long inputData[]){
             LEDonStrip=13;
             maxAmplitude = base5MaxAmplitude;
             pushToLEDStrip(inputData[counter],inputData[counter+1],inputData[counter+2],inputData[counter+3],
-                    LEDonStrip,maxAmplitude,port,portNumber,strip13);
+                    LEDonStrip,maxAmplitude,port,portNumber,strip13B5);
         }
 
 		//This takes care of counters 13 to 16

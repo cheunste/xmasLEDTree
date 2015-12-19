@@ -268,7 +268,8 @@ void clearAllLEDs(){
     int LEDonStrip;
     //Base 6 and Base 5
     LEDonStrip=13;
-    clearStrip(strip13,13*4);
+    clearStrip(strip13B6,13*4);
+    clearStrip(strip13B5,13*4);
 
     //Base 4
     LEDonStrip=10;
@@ -287,8 +288,8 @@ void clearAllLEDs(){
     clearStrip(strip4,4*4);
     
     GIE=0; while(GIE);
-    drawLED(strip13,'B',0,LEDonStrip*4*3);
-    drawLED(strip13,'B',1,LEDonStrip*4*3);
+    drawLED(strip13B6,'B',0,LEDonStrip*4*3);
+    drawLED(strip13B5,'B',1,LEDonStrip*4*3);
     drawLED(strip10,'C',2,LEDonStrip*4*3);
     drawLED(strip8,'C',3,LEDonStrip*4*3);
     drawLED(strip5,'D',0,LEDonStrip*4*3);
