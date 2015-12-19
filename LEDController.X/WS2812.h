@@ -20,7 +20,7 @@ extern "C" {
 //13LEDs, for Base 6
 unsigned char strip13B6[156]@0xDE0;
 //13LEDs, for Base 5 
-unsigned char strip13[156]@0x0d44;
+unsigned char strip13B5[156]@0x0d44;
 //10 LED
 unsigned char strip10[120]@0x0ccc;
 //8 lED
