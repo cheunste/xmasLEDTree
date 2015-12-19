@@ -1,6 +1,6 @@
 # xmasLEDTree
 
-WIP
+Work in progress....
 
 
 1. [Introduction](#introduction)
@@ -13,7 +13,7 @@ This is the github page for the LED Christmas Tree project shown in XXXXXXXXXXXX
 
 Unlike HNTE's  LEDmas Tree, this version is significantly smaller (hence a bit cheaper), play music, can be somewhat controlled by user via an android app and has a spectrum analyzer mode that lights up LEDs based on the music that's playing.
 
-The entire project contains four separate parts
+The entire project contains five separate parts
 
 1. The "tree" itself, which contains all the LEDS and the acrylic glass.
 2. The raspberry pi, which is used to play music user have stored on it and receive command from the Android app.
@@ -50,7 +50,7 @@ Originally, each LED Strip was suppose to be controlled individually by the micr
 
 For example, If there are 24 separate strips of LED, and you need to generate a certain LED pattern on a certain strip, there needs to be some sort of decision statement (if-statements, case-switch, bitwise, etc.) to decide what strip to send to. If there are 24 cascaded if-statements the earlier if-statements can be referenced quicker than the latter if-statements meaning LED strips in latter if-statements will produce unexpected results due to timing. This is probably why in the many WS2812 examples, there is only one pin that's a constant reference. However, using a simple if-else statment on a single port allows me to control two sets of LED strips without any issues.
 
-Although this could be solved by using multiple microcontrollers, I wanted my design to fit in a small box and I couldn't design the circuit with multiple micrcontrollers without going over the limits of the box. While this could be possible by using a PCB (Printed Circuit Board) due to chemical storage reasons, I could not make a PCB. As a compromise, all the LEDs strips on a base is hooked up in series. 
+Although this could be solved by using multiple microcontrollers, I wanted my design (both raspberry pi and the microcontroller) to fit in a small box and I couldn't design the circuit with multiple micrcontrollers without going over the limits of the box. While this could be possible by using a PCB (Printed Circuit Board) due to chemical storage reasons, I could not make a PCB. As a compromise, all the LEDs strips on a base is hooked up in series. 
 
 In addition, since the PIC microcontroller handles both the LED lighting and performs the fourier analysis needed for the spectrum analyzer part, the LEDs in spectrum mode is slower than the music playing.
 
@@ -58,7 +58,7 @@ The raspberry pi was originally going to be used as a middleman whose purpose is
 
 ##Dependencies and Other Notes
 
-Note this is still a work in progress
+Note this is still a work in progress and is specific for software portion of the project.
 
 ###1. Android app
 
@@ -87,3 +87,26 @@ Since the microcontroller is responsible for both the FFT calculation and lighti
 Certain pins on the chip are reservered for sending signal to the WS2812 LEDs. Changing this will require significant change in code.
 
 Certain pins on the chip are used to hook up to the raspberry pi. These are used to activate certain animations. If you want to use different pins, you can change it in the main.c file
+
+###4.TO-DO
+
+####Schematic
+There needs to be more research on the gain. Currently it is maxed out at 200. This is so that it can be send to the microcontroller for fourier analysis. However, as a result of this, if a low impedance speaker is attached, then the LM386 will dump a HUGE load of current to the speaker to the point of overheating. 
+
+This can be easily fixed by reducing the gain, but once gain is lowered, the resulting fourier transform becomes less accurate.
+
+A gain of 20 will do just fine for hearing, but more capacitors are needed to attach in series with the speaker to remove static noises. Also, some way to control volume will be needed at this point.
+
+####Android App
+-Integrate Material Design
+-Add audio control (only doable once audio hardware have been figured out).
+-The bits in the "Lights" section needs to be flipped. Currently "ON" is for turning off the lights and "OFF" is for turning it on. 
+####Raspberry PI
+-Move away from pygame and to something more
+-Fix bugs in relation with activation timing.
+-Raspberry pi does not seem to shut lights off when outside of activation time. Not sure if this is microcontroller problem or what.
+
+###Micocontroller
+-Figure out why certain animation modes are not activated when pi turns on correct pin. Did you forget to disable something?
+-clearAllLED() only works for the top half of the tree. Everything in base 6, 5, and half of four are still lit
+-In the stripAnimation.c file, there needs to be a better way to implement the colorSelection function. Currently, it does work, but as a result of how it is implemented, the maxColorChoices and minColorChoices needs to be hard coded.
