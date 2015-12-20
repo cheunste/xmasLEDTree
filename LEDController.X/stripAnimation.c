@@ -29,7 +29,7 @@
 //in the colorSelection method.
 //However, you can increase it if you want more ratio of green in the LED strips
 int maxColorChoices = 20;
-int minColorChoices =7;
+int minColorChoices =6;
 /*
  * This method selects a color based on the input sets it based on position of the ledArray
  * These technically isn't random, but a limited color assortment that are pleasent
@@ -79,13 +79,13 @@ void colorSelection(unsigned char ledArray[], int randomNumber, int arrayPositio
 //            break;
         
         //Sky Blue
-        case 6:
+        case 5:
             ledArray[arrayPosition]=191;
             ledArray[arrayPosition]=0;
             ledArray[arrayPosition]=255;
             break;
         //Crimson red
-        case 7:
+        case 6:
             ledArray[arrayPosition]=20;
             ledArray[arrayPosition]=220;
             ledArray[arrayPosition]=60;
