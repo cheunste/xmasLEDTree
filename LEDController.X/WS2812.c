@@ -154,7 +154,6 @@ void pushToLEDArray(int LEDonStrip,double LEDratio, double LEDonToStripRatio,
 }
 void pushToLEDStrip(long input1,long input2,long input3,long input4,
         int LEDonStrip,double maxAmplitude,
-        char port,int portNumber,
         unsigned char ledArray[]){
 
 	//This is the maxAmplitude gotten after taking abolute value of FFT. This is only gotten from experimental
