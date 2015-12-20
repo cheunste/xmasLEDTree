@@ -55,7 +55,7 @@ void writeLED(long inputData[]){
             LEDonStrip=13;
             maxAmplitude = base6MaxAmplitude;
 			pushToLEDStrip(inputData[counter],inputData[counter+1],inputData[counter+2],inputData[counter+3],
-                    LEDonStrip,maxAmplitude,port,portNumber,strip13B6);
+                    LEDonStrip,maxAmplitude,strip13B6);
         }
 
 		//This takes care of coutners 5 to 8 as they all need to be on one array
@@ -65,7 +65,7 @@ void writeLED(long inputData[]){
             LEDonStrip=13;
             maxAmplitude = base5MaxAmplitude;
             pushToLEDStrip(inputData[counter],inputData[counter+1],inputData[counter+2],inputData[counter+3],
-                    LEDonStrip,maxAmplitude,port,portNumber,strip13B5);
+                    LEDonStrip,maxAmplitude,strip13B5);
         }
 
 		//This takes care of counters 13 to 16
@@ -75,7 +75,7 @@ void writeLED(long inputData[]){
             LEDonStrip=10;
             maxAmplitude =base4MaxAmplitude;
             pushToLEDStrip(inputData[counter],inputData[counter+1],inputData[counter+2],inputData[counter+3],
-                    LEDonStrip,maxAmplitude,port,portNumber,strip10);
+                    LEDonStrip,maxAmplitude,strip10);
         }
 
 		//This takes care of counters 13 to 16
@@ -85,7 +85,7 @@ void writeLED(long inputData[]){
             LEDonStrip=8;
             maxAmplitude = base3MaxAmplitude;
             pushToLEDStrip(inputData[counter],inputData[counter+1],inputData[counter+2],inputData[counter+3],
-                    LEDonStrip,maxAmplitude,port,portNumber,strip8);
+                    LEDonStrip,maxAmplitude,strip8);
         }
 
 		//This takes care of counters 17 to 20
@@ -95,7 +95,7 @@ void writeLED(long inputData[]){
             LEDonStrip=5;
             maxAmplitude = base2MaxAmplitude;
             pushToLEDStrip(inputData[counter],inputData[counter+1],inputData[counter+2],inputData[counter+3],
-            LEDonStrip,maxAmplitude,port,portNumber,strip5);
+            LEDonStrip,maxAmplitude,strip5);
         }
 		//This takes care of counters 21 to 24
         else if(counter ==21){
@@ -104,9 +104,8 @@ void writeLED(long inputData[]){
             LEDonStrip=4;
             maxAmplitude = base1MaxAmplitude;
             pushToLEDStrip(inputData[counter],inputData[counter+1],inputData[counter+2],inputData[counter+3],
-            LEDonStrip,maxAmplitude,port,portNumber,strip4);
+            LEDonStrip,maxAmplitude,strip4);
         }
-
 	}
 }
 
