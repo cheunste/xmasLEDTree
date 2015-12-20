@@ -36,6 +36,25 @@ void drawAllStrips(){
     GIE=1; while(!GIE);
         
 }
+
+//This turns the entire tree green. Used for certain animations.
+void greenAllStrips(){
+    //greenStrip(unsigned char ledArray[],int LEDonStrip);
+    int base6Strip=13*3;
+    int base5Strip=13*3;
+    int base4Strip=10*3;
+    int base3Strip=8*3;
+    int base2Strip=5*3;
+    int base1Strip=4*3;
+    
+    greenStrip(strip13B6,base6Strip);
+    greenStrip(strip13B5,base5Strip);
+    greenStrip(strip10,base4Strip);
+    greenStrip(strip8,base3Strip);
+    greenStrip(strip5,base2Strip);
+    greenStrip(strip4,base1Strip);
+    drawAllStrips();
+}
 //pushToLEDArray(LEDratio1,onToStripRatio1,0,secondStart,ledArray[], ledIndex);
 void pushToLEDArray(int LEDonStrip,double LEDratio, double LEDonToStripRatio,
         int arrayStart, int arrayEnd,

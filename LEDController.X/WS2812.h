@@ -49,6 +49,7 @@ void spectrumLight(int LEDonStrip, int LEDLightup,char port,int portNumber, unsi
 void drawLED (unsigned char ledData[],char port, int portNumber,int LEDonStrip);
 void sendByte( unsigned char ,char port,int portNumber );
 void drawAllStrips();
+void greenAllStrips();
 #ifdef	__cplusplus
 }
 #endif
