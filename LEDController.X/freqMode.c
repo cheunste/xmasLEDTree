@@ -17,9 +17,7 @@ long magnitudeArray[64];
 void writeLED(long inputData[]){
     
 	int inputValue;
-    int portNumber;
     double maxAmplitude=0;
-    char port='B';
     int LEDonStrip=3;
 
  	for (unsigned char counter = 1; counter < 24; counter++)
@@ -50,8 +48,6 @@ void writeLED(long inputData[]){
 		//
 		//This takes care of counters 1 to 4 as they all need to be on one array
         if(counter ==1){
-            port='B';
-            portNumber=0;
             LEDonStrip=13;
             maxAmplitude = base6MaxAmplitude;
 			pushToLEDStrip(inputData[counter],inputData[counter+1],inputData[counter+2],inputData[counter+3],
@@ -60,8 +56,6 @@ void writeLED(long inputData[]){
 
 		//This takes care of coutners 5 to 8 as they all need to be on one array
         else if(counter ==5){
-            port='B';
-            portNumber=1;
             LEDonStrip=13;
             maxAmplitude = base5MaxAmplitude;
             pushToLEDStrip(inputData[counter],inputData[counter+1],inputData[counter+2],inputData[counter+3],
@@ -70,8 +64,6 @@ void writeLED(long inputData[]){
 
 		//This takes care of counters 13 to 16
         else if(counter ==9){
-            port='C';
-            portNumber=2;
             LEDonStrip=10;
             maxAmplitude =base4MaxAmplitude;
             pushToLEDStrip(inputData[counter],inputData[counter+1],inputData[counter+2],inputData[counter+3],
@@ -80,8 +72,6 @@ void writeLED(long inputData[]){
 
 		//This takes care of counters 13 to 16
         else if(counter ==13){
-            port='C';
-            portNumber=3;
             LEDonStrip=8;
             maxAmplitude = base3MaxAmplitude;
             pushToLEDStrip(inputData[counter],inputData[counter+1],inputData[counter+2],inputData[counter+3],
@@ -90,8 +80,6 @@ void writeLED(long inputData[]){
 
 		//This takes care of counters 17 to 20
         else if(counter ==17){
-            port='D';
-            portNumber=0;
             LEDonStrip=5;
             maxAmplitude = base2MaxAmplitude;
             pushToLEDStrip(inputData[counter],inputData[counter+1],inputData[counter+2],inputData[counter+3],
@@ -99,8 +87,6 @@ void writeLED(long inputData[]){
         }
 		//This takes care of counters 21 to 24
         else if(counter ==21){
-            port='D';
-            portNumber=1;
             LEDonStrip=4;
             maxAmplitude = base1MaxAmplitude;
             pushToLEDStrip(inputData[counter],inputData[counter+1],inputData[counter+2],inputData[counter+3],
