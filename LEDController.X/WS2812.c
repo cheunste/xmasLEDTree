@@ -17,6 +17,25 @@ void delayLEDLong(){
         __delay_ms(1);
     
 }
+//Draw all strips at once
+void drawAllStrips(){
+    int LEDonStrip;
+    
+    GIE=0; while(GIE);
+    LEDonStrip=13;
+    drawLED(strip13B6,'B',0,LEDonStrip*4*3);
+    drawLED(strip13B5,'B',1,LEDonStrip*4*3);
+    LEDonStrip=10;
+    drawLED(strip10,'C',2,LEDonStrip*4*3);
+    LEDonStrip=8;
+    drawLED(strip8,'C',3,LEDonStrip*4*3);
+    LEDonStrip=5;
+    drawLED(strip5,'D',0,LEDonStrip*4*3);
+    LEDonStrip=4;
+    drawLED(strip4,'D',1,LEDonStrip*4*3);
+    GIE=1; while(!GIE);
+        
+}
 //pushToLEDArray(LEDratio1,onToStripRatio1,0,secondStart,ledArray[], ledIndex);
 void pushToLEDArray(int LEDonStrip,double LEDratio, double LEDonToStripRatio,
         int arrayStart, int arrayEnd,
@@ -287,14 +306,7 @@ void clearAllLEDs(){
     LEDonStrip=4;
     clearStrip(strip4,4*4);
     
-    GIE=0; while(GIE);
-    drawLED(strip13B6,'B',0,LEDonStrip*4*3);
-    drawLED(strip13B5,'B',1,LEDonStrip*4*3);
-    drawLED(strip10,'C',2,LEDonStrip*4*3);
-    drawLED(strip8,'C',3,LEDonStrip*4*3);
-    drawLED(strip5,'D',0,LEDonStrip*4*3);
-    drawLED(strip4,'D',1,LEDonStrip*4*3);
-    GIE=1; while(!GIE);
+    drawAllStrips();
     delayLEDLong(); 
 }
 

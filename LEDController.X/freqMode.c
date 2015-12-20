@@ -31,10 +31,14 @@ void writeLED(long inputData[]){
         
         double base6MaxAmplitude=300.0;
         double base5MaxAmplitude=300.0;
-        double base4MaxAmplitude=230.0;
-        double base3MaxAmplitude=185.0;
-        double base2MaxAmplitude=115.0;
-        double base1MaxAmplitude=95.0;
+//        double base4MaxAmplitude=230.0;
+//        double base3MaxAmplitude=185.0;
+//        double base2MaxAmplitude=115.0;
+//        double base1MaxAmplitude=95.0;
+        double base4MaxAmplitude=115.0;
+        double base3MaxAmplitude=92.5;
+        double base2MaxAmplitude=57.5;
+        double base1MaxAmplitude=47.5;
         //port and portNumber are used to inform what port pin to send 
         //the led data array to in the ws2812.c file
 

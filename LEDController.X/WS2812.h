@@ -48,6 +48,7 @@ void clearStrip(unsigned char ledData[],int LEDonStrip);
 void spectrumLight(int LEDonStrip, int LEDLightup,char port,int portNumber, unsigned char ledArray[]);
 void drawLED (unsigned char ledData[],char port, int portNumber,int LEDonStrip);
 void sendByte( unsigned char ,char port,int portNumber );
+void drawAllStrips();
 #ifdef	__cplusplus
 }
 #endif
