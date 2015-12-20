@@ -190,22 +190,22 @@ void pushToLEDStrip(long input1,long input2,long input3,long input4,
 	//Push data for the first strip to the array
 	pushToLEDArray(LEDonStrip,LEDratio1,onToStripRatio1,
             0,secondStart,
-            ledArray, port,portNumber);
+            ledArray);
     
     //Push data for the  second strip to the array
 	pushToLEDArray(LEDonStrip,LEDratio2,onToStripRatio2,
             secondStart,thirdStart,
-            ledArray, port,portNumber);
+            ledArray);
     
     //Push data for the third strip to the array
 	pushToLEDArray(LEDonStrip,LEDratio3,onToStripRatio3,
             thirdStart,fourthStart,
-            ledArray, port,portNumber);
+            ledArray);
     
     //Push data for the  fourth  strip to the array
 	pushToLEDArray(LEDonStrip,LEDratio4,onToStripRatio4,
             fourthStart,fourthEnd,
-            ledArray, port,portNumber);
+            ledArray);
 
 }
 

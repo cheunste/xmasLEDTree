@@ -37,7 +37,7 @@ unsigned char strip4[48]@0x0c00;
 //     170 = blue
 //      255 = red again
 
-void pushToLEDArray(int stripLength,double LEDratio, double LEDonToStripRatio,int arrayStart, int arrayEnd,unsigned char ledArray[],char port, int portNumber);
+void pushToLEDArray(int stripLength,double LEDratio, double LEDonToStripRatio,int arrayStart, int arrayEnd,unsigned char ledArray[]);
 void pushToLEDStrip(long input1,long input2,long input3,long input4,int LEDonStrip,double maxAmplitude,char port,int portNumber,unsigned char ledArray[]);
 void SetColor(unsigned char, unsigned char);
 
