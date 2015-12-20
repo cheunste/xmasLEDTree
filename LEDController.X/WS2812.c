@@ -259,6 +259,7 @@ void clearStrip(unsigned char ledArray[],int LEDonStrip)
 
 }
 
+//Clears all LEDs on the entire tree
 void clearAllLEDs(){
     
     int LEDonStrip;
