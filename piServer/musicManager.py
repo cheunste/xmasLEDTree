@@ -6,8 +6,8 @@ import pygame
 import Queue
 import gpioManager
 folderPath='/home/pi/music/'
-startTime=10
-endTime=24
+startTime=16
+endTime=22
 maxQueueItem=10
 currHour=datetime.datetime.now().hour
 currMonth=datetime.datetime.now().month

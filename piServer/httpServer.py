@@ -11,8 +11,8 @@ import musicManager
 
 #CONSTANTS
 folderPath='/home/pi/music/'
-startTime=13
-endTime=23
+startTime=16
+endTime=22
 maxQueueItem=10
 currHour=datetime.datetime.now().hour
 currMonth=datetime.datetime.now().month
@@ -90,6 +90,12 @@ class ledTreeServer(object):
 				print "IN LED"
 				gpioManager.lightsOff(data[jsonItem])
 				returnMessage.join("LED state changed")
+                        if jsonItem=="BOUNCE":
+                                print "IN BOUNCE"
+                                gpioManager.clearAnimationGPIO()
+                                gpioManager.bounce(data[jsonItem])
+                                returnMessage.join("Bounce Mode On")
+
 			
 			#The following items are used to manipulate music and requires a queue
 			if jsonItem=="PAUSE":
@@ -127,6 +133,7 @@ class ledTreeServer(object):
 				musicCommandQueue.put(data[jsonItem])
 				queueLock.release()
 
+
 		return returnMessage
 
 def startServer():
@@ -161,8 +168,13 @@ if __name__=='__main__':
 	musicThread=threading.Thread(target=musicManager.musicHandler,args=(musicCommandQueue,queueLock))
 	musicThread.daemon=True
 
+        #Create a thread to monitor system time 
+        timeThread=threading.Thread(target=LEDOff)
+        timeThread.daemon=True
+
 	#Start the two threads
 	musicThread.start()
+        timeThread.start()
 	#LEDThread.start()
 
 	#Start the server

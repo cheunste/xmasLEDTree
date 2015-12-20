@@ -93,12 +93,13 @@ void main(void)
             }
             else{
                 if (PORTCbits.RC4==1)redGreenLevels();
-                if (PORTCbits.RC5==1)redGreenStrips();
-                if (PORTCbits.RC6==1)randomLight();
-                if (PORTCbits.RC7==1)ring();
+                else if (PORTCbits.RC5==1)redGreenStrips();
+                else if (PORTCbits.RC6==1)randomLight();
+                else if (PORTCbits.RC7==1)ring();
                 //You should onlly get to the else statement below if 
                 //None of the above is matched
-                if(PORTCbits.RC4==0 && PORTCbits.RC5==0 && PORTCbits.RC6==0 && PORTCbits.RC7==0){
+//                if(PORTCbits.RC4==0 && PORTCbits.RC5==0 && PORTCbits.RC6==0 && PORTCbits.RC7==0){
+                else{
                     randomLight();
 //                    for (int i=0; i<10;i++) randomLight();
 //                    for (int i=0; i<10;i++) ring();

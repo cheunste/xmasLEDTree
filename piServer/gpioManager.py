@@ -12,7 +12,7 @@ http://raspberrypi.stackexchange.com/questions/12966/what-is-the-difference-betw
 Setting a pin high (1) means it is active
 Setting a pin low (0) means it is inactive 
 
-BCM04 (07)-
+BCM04 (07)-bounce[0]
 BCM08 (24)-Music Playing [1]
 BCM07 (26)-Music Pause [0]
 BCM09 (21)-
@@ -36,14 +36,14 @@ randomPin		= 23
 ringPin			= 24
 LEDPin			= 25
 playingPin		= 8
-pausePin		= 7
+bouncePin		= 7
 
 def GPIOSetup():
 	GPIO.cleanup()
 	GPIO.setmode(GPIO.BCM)
 	GPIO.setup(spectrumPin,GPIO.OUT)
 	GPIO.setup(playingPin,GPIO.OUT)
-	GPIO.setup(pausePin,GPIO.OUT)
+	GPIO.setup(bouncePin,GPIO.OUT)
 	GPIO.setup(ringPin,GPIO.OUT)
 	GPIO.setup(randomPin,GPIO.OUT)
 	GPIO.setup(LEDPin,GPIO.OUT)
@@ -54,7 +54,7 @@ def GPIOSetup():
 	GPIO.output(playingPin,GPIO.HIGH)
 	GPIO.output(randomPin,GPIO.LOW)
 	GPIO.output(ringPin,GPIO.LOW)
-	GPIO.output(pausePin,GPIO.LOW)
+	GPIO.output(bouncePin,GPIO.LOW)
 	GPIO.output(LEDPin,GPIO.LOW)
 	GPIO.output(RGLevelPin,GPIO.LOW)
 	GPIO.output(RGStripPin,GPIO.LOW)
@@ -93,6 +93,13 @@ def ringAnimation(state):
 	else:
 		GPIO.output(ringPin,GPIO.LOW)
 		print "Ring is deactivated"
+#Bounce animation
+def bounce(state):
+	if state:
+		GPIO.output(bouncePin,GPIO.HIGH)
+	else:
+		GPIO.output(bouncePin,GPIO.LOW)
+		print "bounce is deactivated"
 
 #Method for Red Green Levels
 def rgLevelAnimation(state):
@@ -115,18 +122,18 @@ def rgStripsAnimation(state):
 #Method to Pause music
 def pause(state):
 	print "in gpio pause method"
-	#GPIO.output(pausePin,GPIO.HIGH) if state else GPIO.output(pausePin,GPIO.LOW)
+	#GPIO.output(bouncePin,GPIO.HIGH) if state else GPIO.output(bouncePin,GPIO.LOW)
 	if state:
-		GPIO.output(pausePin,GPIO.HIGH)
+		GPIO.output(bouncePin,GPIO.HIGH)
 	else:
-		GPIO.output(pausePin,GPIO.LOW)
+		GPIO.output(bouncePin,GPIO.LOW)
 	print "Pause pin is now ",state
 
 #Method to see if music is playing. Spectrum animation depends on this, but the dependency shows up in
 #the microcontorller
 def playing(state):
 	print "in gpio playing method"
-	#GPIO.output(playingPin,GPIO.HIGH) if state else GPIO.output(pausePin,GPIO.LOW)
+	#GPIO.output(playingPin,GPIO.HIGH) if state else GPIO.output(bouncePin,GPIO.LOW)
 	if state:
 		GPIO.output(playingPin,GPIO.HIGH)
 	else:
