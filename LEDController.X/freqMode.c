@@ -107,6 +107,7 @@ void writeLED(long inputData[]){
             LEDonStrip,maxAmplitude,strip4);
         }
 	}
+    drawAllStrips();
 }
 
 void fftMode(){
