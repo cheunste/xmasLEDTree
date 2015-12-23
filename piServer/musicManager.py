@@ -5,9 +5,11 @@ import json
 import pygame
 import Queue
 import gpioManager
+import httpServer
+
 folderPath='/home/pi/music/'
-startTime=16
-endTime=22
+startTime=13
+endTime=23
 maxQueueItem=10
 currHour=datetime.datetime.now().hour
 currMonth=datetime.datetime.now().month
@@ -32,7 +34,10 @@ def play_songs(file_list,musicCommandQueue,lock):
 		pygame.mixer.music.load(file_list[num])
 		print num,song
 		#Play song
-		pygame.mixer.music.play()
+		if httpServer2.inTimeFrame():
+			gpioManager.lightsState(not httpServer2.inTimeFrame())
+			pygame.mixer.music.play()
+		#pygame.mixer.music.play()
 		while pygame.mixer.music.get_busy():
 			pygame.time.Clock().tick(100)
 			#This is most liekly where condition statements for when user wants to pause, skip, resume, goes
@@ -75,7 +80,10 @@ def musicHandler(musicCommandQueue,lock):
 		#self.play_songs(files)
 	#if month is December and hour is between 1600 and 2300, play music
 	while currMonth==11 or currMonth==12:
-		while inTimeFrame():
+		while httpServer2.inTimeFrame():	
+			gpioManager.lightsState(httpServer2.inTimeFrame())
 			play_songs(files,musicCommandQueue,lock)
+			#gpioManager.lightsState(False)
 		#if it is not in time frame but still in the current moth, activate the pin on pi to turn off all the lights on the microcontroller
-		gpioManager.lightsOff(True)
+		#while not httpServer2.inTimeFrame():
+		#	gpioManager.lightsState(True)

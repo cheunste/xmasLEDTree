@@ -131,10 +131,6 @@ void randomLight(){
         randomNumber=floor(rand() / (RAND_MAX / (maxColorChoices+ 1) + 1));
         colorSelection(strip13B6, randomNumber,i);
     }
-    GIE=0; while(GIE);
-    drawLED(strip13B6,'B',0,LEDonStrip*4*3);
-    GIE=1; while(!GIE);
-    delayLEDLong();
     
     //For base 5
     LEDonStrip=13;
@@ -142,10 +138,6 @@ void randomLight(){
         randomNumber=floor(rand() / (RAND_MAX / (maxColorChoices+ 1) + 1));
         colorSelection(strip13B5, randomNumber,i);
     }
-    GIE=0; while(GIE);
-    drawLED(strip13B5,'B',1,LEDonStrip*4*3);
-    GIE=1; while(!GIE);
-    delayLEDLong();        
     
     //For Base 4
     LEDonStrip=10;
@@ -153,9 +145,6 @@ void randomLight(){
         randomNumber=floor(rand() / (RAND_MAX / (maxColorChoices+ 1) + 1));
         colorSelection(strip10, randomNumber,i);
     }
-    GIE=0; while(GIE);
-    drawLED(strip10,'C',2,LEDonStrip*4*3);
-    GIE=1; while(!GIE);
     
     //For Base 3
     LEDonStrip=8;
@@ -163,10 +152,7 @@ void randomLight(){
         randomNumber=floor(rand() / (RAND_MAX / (maxColorChoices+ 1) + 1));
         colorSelection(strip8, randomNumber,i);
     }
-    GIE=0; while(GIE);
-    drawLED(strip8,'C',3,LEDonStrip*4*3);
-    GIE=1; while(!GIE);
-    delayLEDLong();
+    
     
     //For Base 2
     LEDonStrip=5;
@@ -174,10 +160,6 @@ void randomLight(){
         randomNumber=floor(rand() / (RAND_MAX / (maxColorChoices+ 1) + 1));
         colorSelection(strip5, randomNumber,i);
     }
-    GIE=0; while(GIE);
-    drawLED(strip5,'D',0,LEDonStrip*4*3);
-    GIE=1; while(!GIE);    
-    delayLEDLong();
     
     //For Base 1
     LEDonStrip=4;
@@ -185,10 +167,9 @@ void randomLight(){
         randomNumber=floor(rand() / (RAND_MAX / (maxColorChoices+ 1) + 1));
         colorSelection(strip4, randomNumber,i);
     }
-    GIE=0; while(GIE);
-    drawLED(strip4,'D',1,LEDonStrip*4*3);
-    GIE=1; while(!GIE);    
-    delayLEDLong();
+
+    drawAllStrips();
+//    delayLEDLong();
 }
 
 //This is a method used to set up LED array for the bounce method.
@@ -198,196 +179,139 @@ void bouncePrep(unsigned char ledArray[],
 }
 //Send a colored LED from the start of a strip to the end of a strip and 
 //bounce back to the start of the strip.
-void bounce(){
-    int LEDonStrip;
-    int i;
+//Thjs animation is where the LEDs turn a different color from the center out to the edge
+//It starts from the verj top of the tree and cascades to the bottom
+bounce(){
+	int LEDonStrip;
     int randomNumber;
-    int base6Tracker;
-    int base5Tracker;
-    int base4Tracker;
-    int base3Tracker;
-    int base2Tracker;
-    int base1Tracker;
-    
+	
     //These random numbers uses 8 because I do not want a case where
-    //it uses green.
+    //jt uses green.
     randomNumber=floor(rand() / (RAND_MAX / (minColorChoices+ 1) + 1));
-    LEDonStrip=13;
-    
-    while(base6Tracker<LEDonStrip*3){
-        if(base6Tracker>LEDonStrip*3){
-            
-        }
-        base6Tracker+=3;
-    }
-    
-    greenStrip(strip13B6,LEDonStrip*3);
-//    greenStrip(strip10,);
-    while(base6Tracker<LEDonStrip*3){
-        colorSelection(strip13B6, 0,base6Tracker);
-        colorSelection(strip13B6, 0,base6Tracker+(baseLevel6LED*3));
-        colorSelection(strip13B6, 3,base6Tracker+(baseLevel6LED*3*2));
-        colorSelection(strip13B6, 2,base6Tracker+(baseLevel6LED*3*3));
-        base6Tracker+=3;
-        GIE=0; while(GIE);
-        drawLED(strip13B6,'B',0,LEDonStrip*4*3);
-        for(i=0; i<150; i++)
-            __delay_ms(1);
-        GIE=1; while(!GIE);
-        greenStrip(strip13B6,LEDonStrip*3*4);
-    }
-    GIE=0; while(GIE);
-    drawLED(strip13B6,'B',0,LEDonStrip*4*3);
-    GIE=1; while(!GIE);
-    
+
+	greenAllStrips();
+
+
+	for( int i=0; i < 100*3; i+=3){
+
+		int bounce = abs(((i+baseLevel1LED)%(baseLevel1LED*2))-baseLevel1LED);
+		
+		for (int j=0; j <6; j++){
+			greenAllStrips();
+
+			//ljght up base 1
+			colorSelection(strip4, randomNumber,bounce);
+			colorSelection(strip4, randomNumber,bounce+(baseLevel1LED*3));
+			colorSelection(strip4, randomNumber,bounce+(baseLevel1LED*3*2));
+			colorSelection(strip4, randomNumber,bounce+(baseLevel1LED*3*3));
+
+			//base 2
+			bounce = abs(((i+baseLevel2LED)%(baseLevel2LED*2))-baseLevel2LED);
+			colorSelection(strip5, randomNumber,bounce);
+			colorSelection(strip5, randomNumber,bounce+(baseLevel2LED*3));
+			colorSelection(strip5, randomNumber,bounce+(baseLevel2LED*3*2));
+			colorSelection(strip5, randomNumber,bounce+(baseLevel2LED*3*3));
+
+			//base 3
+			bounce = abs(((i+baseLevel3LED)%(baseLevel3LED*2))-baseLevel3LED);
+			colorSelection(strip8, randomNumber,bounce);
+			colorSelection(strip8, randomNumber,bounce+(baseLevel3LED*3));
+			colorSelection(strip8, randomNumber,bounce+(baseLevel3LED*3*2));
+			colorSelection(strip8, randomNumber,bounce+(baseLevel3LED*3*3));
+
+			//base 4
+			bounce = abs(((i+baseLevel4LED)%(baseLevel4LED*2))-baseLevel4LED);
+			colorSelection(strip10, randomNumber,bounce);
+			colorSelection(strip10, randomNumber,bounce+(baseLevel4LED*3));
+			colorSelection(strip10, randomNumber,bounce+(baseLevel4LED*3*2));
+			colorSelection(strip10, randomNumber,bounce+(baseLevel4LED*3*3));
+
+			//base 5
+			bounce = abs(((i+baseLevel5LED)%(baseLevel5LED*2))-baseLevel5LED);
+			colorSelection(strip13B5, randomNumber,bounce);
+			colorSelection(strip13B5, randomNumber,bounce+(baseLevel5LED*3));
+			colorSelection(strip13B5, randomNumber,bounce+(baseLevel5LED*3*2));
+			colorSelection(strip13B5, randomNumber,bounce+(baseLevel5LED*3*3));
+	
+			//base 6
+			bounce = abs(((i+baseLevel6LED)%(baseLevel6LED*2))-baseLevel6LED);
+			colorSelection(strip13B6, randomNumber,bounce);
+			colorSelection(strip13B6, randomNumber,bounce+(baseLevel6LED*3));
+			colorSelection(strip13B6, randomNumber,bounce+(baseLevel6LED*3*2));
+			colorSelection(strip13B6, randomNumber,bounce+(baseLevel6LED*3*3));
+	
+			//draw all LEDs
+			drawAllStrips();
+//            delayLEDLong();
+		}
+	}
 }
 
-void ring(){
-    int LEDonStrip;
-    int i;
-    int tracker=0;
+//Thjs animation is where the LEDs turn a different color from the center out to the edge
+//It starts from the verj top of the tree and cascades to the bottom
+ring(){
+	int LEDonStrip;
     int randomNumber;
-    //base 6
+	
     //These random numbers uses 8 because I do not want a case where
-    //it uses green.
+    //jt uses green.
     randomNumber=floor(rand() / (RAND_MAX / (minColorChoices+ 1) + 1));
-    LEDonStrip=13;
-    greenStrip(strip13B6,LEDonStrip*3);
-    while(tracker<LEDonStrip*3){
-        colorSelection(strip13B6, randomNumber,tracker);
-        colorSelection(strip13B6, randomNumber,tracker+(LEDonStrip*3));
-        colorSelection(strip13B6, randomNumber,tracker+(LEDonStrip*3*2));
-        colorSelection(strip13B6, randomNumber,tracker+(LEDonStrip*3*3));
-        tracker+=3;
-        GIE=0; while(GIE);
-        drawLED(strip13B6,'B',0,LEDonStrip*4*3);
-        for(i=0; i<150; i++)
-            __delay_ms(1);
-        GIE=1; while(!GIE);
-//        greenStrip(strip13,LEDonStrip*3*4);
-    }
-    greenStrip(strip13B6,LEDonStrip*3*4);
-    GIE=0; while(GIE);
-    drawLED(strip13B6,'B',0,LEDonStrip*4*3);
-    GIE=1; while(!GIE);
-    
-    //base 5
-    randomNumber=floor(rand() / (RAND_MAX / (minColorChoices+ 1) + 1));
-    LEDonStrip=13;
-    greenStrip(strip13B5,LEDonStrip*3);
-    tracker=0;
-    while(tracker<LEDonStrip*3){
-        colorSelection(strip13B5, randomNumber,tracker);
-        colorSelection(strip13B5, randomNumber,tracker+(LEDonStrip*3));
-        colorSelection(strip13B5, randomNumber,tracker+(LEDonStrip*3*2));
-        colorSelection(strip13B5, randomNumber,tracker+(LEDonStrip*3*3));
-        tracker+=3;
-        GIE=0; while(GIE);
-        drawLED(strip13B5,'B',1,LEDonStrip*4*3);
-        for(i=0; i<150; i++)
-            __delay_ms(1);
-        GIE=1; while(!GIE);
-//        greenStrip(strip13,LEDonStrip*3*4);
-    }
-    greenStrip(strip13B5,LEDonStrip*3*4);
-    GIE=0; while(GIE);
-    drawLED(strip13B5,'B',1,LEDonStrip*4*3);
-    GIE=1; while(!GIE);  
-    
-    //base 4
-    randomNumber=floor(rand() / (RAND_MAX / (minColorChoices+ 1) + 1));
-    LEDonStrip=10;
-    greenStrip(strip10,LEDonStrip*3);
-    tracker=0;
-    while(tracker<LEDonStrip*3){
-        colorSelection(strip10, randomNumber,tracker);
-        colorSelection(strip10, randomNumber,tracker+(LEDonStrip*3));
-        colorSelection(strip10, randomNumber,tracker+(LEDonStrip*3*2));
-        colorSelection(strip10, randomNumber,tracker+(LEDonStrip*3*3));
-        tracker+=3;
-        GIE=0; while(GIE);
-        drawLED(strip10,'C',2,LEDonStrip*4*3);
-        for(i=0; i<150; i++)
-            __delay_ms(1);
-        GIE=1; while(!GIE);
-//        greenStrip(strip10,LEDonStrip*3*4);
-    }
-    greenStrip(strip10,LEDonStrip*3*4);
-    GIE=0; while(GIE);
-    drawLED(strip10,'C',2,LEDonStrip*4*3);
-    GIE=1; while(!GIE);    
-    
-    //base 3
-    randomNumber=floor(rand() / (RAND_MAX / (minColorChoices+ 1) + 1));
-    LEDonStrip=8;
-    greenStrip(strip8,LEDonStrip*3);
-    tracker=0;
-    while(tracker<LEDonStrip*3){
-        colorSelection(strip8, randomNumber,tracker);
-        colorSelection(strip8, randomNumber,tracker+(LEDonStrip*3));
-        colorSelection(strip8, randomNumber,tracker+(LEDonStrip*3*2));
-        colorSelection(strip8, randomNumber,tracker+(LEDonStrip*3*3));
-        tracker+=3;
-        GIE=0; while(GIE);
-        drawLED(strip8,'C',3,LEDonStrip*4*3);
-        for(i=0; i<150; i++)
-            __delay_ms(1);
-        GIE=1; while(!GIE);
-//        greenStrip(strip8,LEDonStrip*3*4);
-    }
-    greenStrip(strip8,LEDonStrip*3*4);
-    GIE=0; while(GIE);
-    drawLED(strip8,'C',3,LEDonStrip*4*3);
-    GIE=1; while(!GIE);
-    
-    //base 2
 
-    randomNumber=floor(rand() / (RAND_MAX / (minColorChoices+ 1) + 1));
-    LEDonStrip=5;
-    greenStrip(strip5,LEDonStrip*3);
-    tracker=0;
-    while(tracker<LEDonStrip*3){
-        colorSelection(strip5, randomNumber,tracker);
-        colorSelection(strip5, randomNumber,tracker+(LEDonStrip*3));
-        colorSelection(strip5, randomNumber,tracker+(LEDonStrip*3*2));
-        colorSelection(strip5, randomNumber,tracker+(LEDonStrip*3*3));
-        tracker+=3;
-        GIE=0; while(GIE);
-        drawLED(strip5,'D',0,LEDonStrip*4*3);
-        for(i=0; i<150; i++)
-            __delay_ms(1);
-        GIE=1; while(!GIE);
-//        greenStrip(strip5,LEDonStrip*3*4);
-    }
-    greenStrip(strip5,LEDonStrip*3*4);
-    GIE=0; while(GIE);
-    drawLED(strip5,'D',0,LEDonStrip*4*3);
-    GIE=1; while(!GIE);
-    
-    //base 1
-    randomNumber=floor(rand() / (RAND_MAX / (minColorChoices+ 1) + 1));
-    LEDonStrip=4;
-    greenStrip(strip4,LEDonStrip*3);
-    tracker=0;
-    while(tracker<LEDonStrip*3){
-        colorSelection(strip4, randomNumber,tracker);
-        colorSelection(strip4, randomNumber,tracker+(LEDonStrip*3));
-        colorSelection(strip4, randomNumber,tracker+(LEDonStrip*3*2));
-        colorSelection(strip4, randomNumber,tracker+(LEDonStrip*3*3));
-        tracker+=3;
-        GIE=0; while(GIE);
-        drawLED(strip4,'D',1,LEDonStrip*4*3);
-        for(i=0; i<150; i++)
-            __delay_ms(1);
-        GIE=1; while(!GIE);
-//        greenStrip(strip4,LEDonStrip*3*4);
-    }
-    greenStrip(strip4,LEDonStrip*3*4);
-    GIE=0; while(GIE);
-    drawLED(strip4,'D',1,LEDonStrip*4*3);
-    GIE=1; while(!GIE);    
+	greenAllStrips();
+
+	for( int i=0; i < 13*3; i+=3){
+	
+		for (int j=0; j <6; j++){
+			if(i <=10*3){
+				if(i<=8*3){
+					if(i<=5*3){
+						if(i<=4*3){
+							//ljght up base 1
+							colorSelection(strip4, randomNumber,i);
+							colorSelection(strip4, randomNumber,i+(baseLevel1LED*3));
+							colorSelection(strip4, randomNumber,i+(baseLevel1LED*3*2));
+							colorSelection(strip4, randomNumber,i+(baseLevel1LED*3*3));
+
+						}
+						//base 2
+						colorSelection(strip5, randomNumber,i);
+						colorSelection(strip5, randomNumber,i+(baseLevel2LED*3));
+						colorSelection(strip5, randomNumber,i+(baseLevel2LED*3*2));
+						colorSelection(strip5, randomNumber,i+(baseLevel2LED*3*3));
+
+					}
+					//base 3
+					colorSelection(strip8, randomNumber,i);
+					colorSelection(strip8, randomNumber,i+(baseLevel3LED*3));
+					colorSelection(strip8, randomNumber,i+(baseLevel3LED*3*2));
+					colorSelection(strip8, randomNumber,i+(baseLevel3LED*3*3));
+
+				}
+				//base 4
+				colorSelection(strip10, randomNumber,i);
+				colorSelection(strip10, randomNumber,i+(baseLevel4LED*3));
+				colorSelection(strip10, randomNumber,i+(baseLevel4LED*3*2));
+				colorSelection(strip10, randomNumber,i+(baseLevel4LED*3*3));
+
+			}
+
+			//base 
+			colorSelection(strip13B5, randomNumber,i);
+			colorSelection(strip13B5, randomNumber,i+(baseLevel5LED*3));
+			colorSelection(strip13B5, randomNumber,i+(baseLevel5LED*3*2));
+			colorSelection(strip13B5, randomNumber,i+(baseLevel5LED*3*3));
+	
+			//base 6
+			colorSelection(strip13B6, randomNumber,i);
+			colorSelection(strip13B6, randomNumber,i+(baseLevel6LED*3));
+			colorSelection(strip13B6, randomNumber,i+(baseLevel6LED*3*2));
+			colorSelection(strip13B6, randomNumber,i+(baseLevel6LED*3*3));
+	
+			//draw all LEDs
+			drawAllStrips();
+		}
+	}
 }
-
 /*
  * redGreenLevels is a static LED arrangment that
  * sets the bottom most level to be either green or red and then alternates for
@@ -430,60 +354,38 @@ void redGreenLevels(){
     for(i=0; i<LEDonStrip*4*3;i+=3){
         colorSelection(strip13B6, alt1,i);
     }
-    GIE=0; while(GIE);
-    drawLED(strip13B6,'B',0,LEDonStrip*4*3);
-    GIE=1; while(!GIE);
-    delayLEDLong();
-    
+        
     //For base 5
     LEDonStrip=13;
     for(i=0; i<LEDonStrip*4*3;i+=3){
         colorSelection(strip13B5, alt2,i);
     }
-    GIE=0; while(GIE);
-    drawLED(strip13B5,'B',1,LEDonStrip*4*3);
-    GIE=1; while(!GIE);
-    delayLEDLong();
-    //For Base 4
+        //For Base 4
     LEDonStrip=10;
     for(i=0; i<LEDonStrip*4*3;i+=3){
         colorSelection(strip10, alt1,i);
     }
-    GIE=0; while(GIE);
-    drawLED(strip10,'C',2,LEDonStrip*4*3);
-    GIE=1; while(!GIE);
-    delayLEDLong();
-    
+        
     //For Base 3
     LEDonStrip=8;
     for(i=0; i<LEDonStrip*4*3;i+=3){
         colorSelection(strip8, alt2,i);
     }    
-    GIE=0; while(GIE);
-    drawLED(strip8,'C',3,LEDonStrip*4*3);
-    GIE=1; while(!GIE);
-    delayLEDLong();
-    
+        
     //For Base 2
     LEDonStrip=5;
     for(i=0; i<LEDonStrip*4*3;i+=3){
         colorSelection(strip5, alt1,i);
     }
-    GIE=0; while(GIE);
-    drawLED(strip5,'D',0,LEDonStrip*4*3);
-    GIE=1; while(!GIE);
-    delayLEDLong();
-    
+        
     //For Base 1
     LEDonStrip=4;
     for(i=0; i<LEDonStrip*4*3;i+=3){
         colorSelection(strip4, alt2,i);
     }    
-    GIE=0; while(GIE);
-    drawLED(strip4,'D',1,LEDonStrip*4*3);
-    GIE=1; while(!GIE);
+    
+	drawAllStrips();
     delayLEDLong();
-
 }
 
 /*
@@ -534,10 +436,6 @@ void redGreenStrips(){
         else if(i>=LEDonStrip*2 && i<LEDonStrip*3)colorSelection(strip13B6, alt3,i);
         else if(i>=LEDonStrip*3 && i<LEDonStrip*4)colorSelection(strip13B6, alt4,i);
     }
-    GIE=0; while(GIE);
-    drawLED(strip13B6,'B',0,LEDonStrip*4*3);
-    GIE=1; while(!GIE);
-    delayLEDLong();
     
     //For base 5
     LEDonStrip=13;
@@ -547,10 +445,6 @@ void redGreenStrips(){
         else if(i>=LEDonStrip*2 && i<LEDonStrip*3)colorSelection(strip13B5, alt4,i);
         else if(i>=LEDonStrip*3 && i<LEDonStrip*4)colorSelection(strip13B5, alt1,i);
     }
-    GIE=0; while(GIE);
-    drawLED(strip13B5,'B',1,LEDonStrip*4*3);
-    GIE=1; while(!GIE);
-    delayLEDLong();
     //For Base 4
     LEDonStrip=10;
     for(i=0; i<LEDonStrip*4*3;i+=3){
@@ -559,10 +453,6 @@ void redGreenStrips(){
         else if(i>=LEDonStrip*2 && i<LEDonStrip*3)colorSelection(strip10, alt3,i);
         else if(i>=LEDonStrip*3 && i<LEDonStrip*4)colorSelection(strip10, alt4,i);
     }
-    GIE=0; while(GIE);
-    drawLED(strip10,'C',2,LEDonStrip*4*3);
-    GIE=1; while(!GIE);
-    delayLEDLong();
     
     //For Base 3
     LEDonStrip=8;
@@ -572,11 +462,6 @@ void redGreenStrips(){
         else if(i>=LEDonStrip*2 && i<LEDonStrip*3)colorSelection(strip8, alt4,i);
         else if(i>=LEDonStrip*3 && i<LEDonStrip*4)colorSelection(strip8, alt1,i);
     }    
-    GIE=0; while(GIE);
-    drawLED(strip8,'C',3,LEDonStrip*4*3);
-    GIE=1; while(!GIE);
-    delayLEDLong();
-    
     //For Base 2
     LEDonStrip=5;
     for(i=0; i<LEDonStrip*4*3;i+=3){
@@ -585,10 +470,6 @@ void redGreenStrips(){
         else if(i>=LEDonStrip*2 && i<LEDonStrip*3)colorSelection(strip5, alt3,i);
         else if(i>=LEDonStrip*3 && i<LEDonStrip*4)colorSelection(strip5, alt4,i);
     }
-    GIE=0; while(GIE);
-    drawLED(strip5,'D',0,LEDonStrip*4*3);
-    GIE=1; while(!GIE);
-    delayLEDLong();
     
     //For Base 1
     LEDonStrip=4;
@@ -598,8 +479,7 @@ void redGreenStrips(){
         else if(i>=LEDonStrip*2 && i<LEDonStrip*3)colorSelection(strip4, alt4,i);
         else if(i>=LEDonStrip*3 && i<LEDonStrip*4)colorSelection(strip4, alt1,i);
     }    
-    GIE=0; while(GIE);
-    drawLED(strip4,'D',1,LEDonStrip*4*3);
-    GIE=1; while(!GIE);
-    delayLEDLong();    
+
+	drawAllStrips();
+    delayLEDLong();
 }

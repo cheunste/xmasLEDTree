@@ -18,7 +18,8 @@ extern "C" {
     
 //NOTE: bases with 10 or 13 LEDs need to be tired all in one at once
 //13LEDs, for Base 6
-unsigned char strip13B6[156]@0xDE0;
+//unsigned char strip13B6[156]@0x0DE0;
+unsigned char strip13B6[156];
 //13LEDs, for Base 5 
 unsigned char strip13B5[156]@0x0d44;
 //10 LED

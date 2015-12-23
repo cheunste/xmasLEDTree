@@ -67,6 +67,7 @@ void main(void)
 	TRISB = 0b11111000;
 	TRISC = 0b11110000;
 	TRISD = 0b00000000;
+    TRISE = 0b00000011;
 
 
 	// Clear all ports
@@ -74,6 +75,7 @@ void main(void)
 	PORTB = 0b00000000;
 	PORTC = 0b00000000;
 	PORTD = 0b00000000;
+    PORTE = 0b00000000;
 
 
     PLLEN=1;
@@ -81,6 +83,7 @@ void main(void)
     //Not able to use external crystal 
 //    OSCCON=111;
 
+    greenAllStrips();
     //Please refer to the TRISX setup as to the logic for the while loop
 	while(1)
 	{
@@ -96,10 +99,12 @@ void main(void)
                 else if (PORTCbits.RC5==1)redGreenStrips();
                 else if (PORTCbits.RC6==1)randomLight();
                 else if (PORTCbits.RC7==1)ring();
-                //You should onlly get to the else statement below if 
-                //None of the above is matched
-//                if(PORTCbits.RC4==0 && PORTCbits.RC5==0 && PORTCbits.RC6==0 && PORTCbits.RC7==0){
-                else{
+                else if (PORTBbits.RB6==1)bounce();
+
+                //You should onlly get to the else statement below if in some
+                //REALLY bizarre case that everything else is off (you screwed up rasp. pi code))
+                if(PORTCbits.RC4==0 && PORTCbits.RC5==0 && PORTCbits.RC6==0 && PORTCbits.RC7==0 
+                        && PORTBbits.RB6==0){
                     randomLight();
 //                    for (int i=0; i<10;i++) randomLight();
 //                    for (int i=0; i<10;i++) ring();
@@ -108,8 +113,6 @@ void main(void)
                 }
             }
         }
-        
-
 	}
 }
 

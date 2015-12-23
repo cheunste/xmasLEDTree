@@ -13,7 +13,7 @@ void delayLED(){
 
 //This delay is used for animation methods. Can be as long as you want
 void delayLEDLong(){
-    for(int i=0; i<10000;i++)
+    for(int i=0; i<1000;i++)
         __delay_ms(1);
     
 }
@@ -40,12 +40,12 @@ void drawAllStrips(){
 //This turns the entire tree green. Used for certain animations.
 void greenAllStrips(){
     //greenStrip(unsigned char ledArray[],int LEDonStrip);
-    int base6Strip=13*3;
-    int base5Strip=13*3;
-    int base4Strip=10*3;
-    int base3Strip=8*3;
-    int base2Strip=5*3;
-    int base1Strip=4*3;
+    int base6Strip=13*4;
+    int base5Strip=13*4;
+    int base4Strip=10*4;
+    int base3Strip=8*4;
+    int base2Strip=5*4;
+    int base1Strip=4*4;
     
     greenStrip(strip13B6,base6Strip);
     greenStrip(strip13B5,base5Strip);

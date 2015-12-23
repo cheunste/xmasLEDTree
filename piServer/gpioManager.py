@@ -12,20 +12,20 @@ http://raspberrypi.stackexchange.com/questions/12966/what-is-the-difference-betw
 Setting a pin high (1) means it is active
 Setting a pin low (0) means it is inactive 
 
-BCM04 (07)-bounce[0]
-BCM08 (24)-Music Playing [1]
-BCM07 (26)-Music Pause [0]
-BCM09 (21)-
-BCM10 (19)-
-BCM17 (11)-
-BCM18 (12)-Spectrum Mode [1]
-BCM21 (13)-
-BCM22 (14)-
-BCM23 (16)-Random Mode [0]
-BCM24 (18)-Ring Mode [0]
-BCM25 (22)-LEDPin[1]
-BCM27 (13)-
-BCM22 (15)-
+GPIO04 (07)-
+GPIO08 (24)-Music Playing [1]
+GPIO07 (26)-Music Pause [0]
+GPIO09 (21)-
+GPIO10 (19)-
+GPIO17 (11)-
+GPIO18 (12)-Spectrum Mode [1]
+GPIO21 (13)-
+GPIO22 (14)-
+GPIO23 (16)-Random Mode [0]
+GPIO24 (18)-Ring Mode [0]
+GPIO25 (22)-LEDOffPin[1]
+GPIO27 (13)-
+GPIO22 (15)-
 
 '''
 
@@ -34,7 +34,7 @@ RGStripPin		= 15
 spectrumPin		= 18
 randomPin		= 23
 ringPin			= 24
-LEDPin			= 25
+LEDOffPin		= 25
 playingPin		= 8
 bouncePin		= 7
 
@@ -46,7 +46,7 @@ def GPIOSetup():
 	GPIO.setup(bouncePin,GPIO.OUT)
 	GPIO.setup(ringPin,GPIO.OUT)
 	GPIO.setup(randomPin,GPIO.OUT)
-	GPIO.setup(LEDPin,GPIO.OUT)
+	GPIO.setup(LEDOffPin,GPIO.OUT)
 	GPIO.setup(RGLevelPin,GPIO.OUT)
 	GPIO.setup(RGStripPin,GPIO.OUT)
 
@@ -55,7 +55,7 @@ def GPIOSetup():
 	GPIO.output(randomPin,GPIO.LOW)
 	GPIO.output(ringPin,GPIO.LOW)
 	GPIO.output(bouncePin,GPIO.LOW)
-	GPIO.output(LEDPin,GPIO.LOW)
+	GPIO.output(LEDOffPin,GPIO.LOW)
 	GPIO.output(RGLevelPin,GPIO.LOW)
 	GPIO.output(RGStripPin,GPIO.LOW)
 
@@ -70,62 +70,67 @@ def clearAnimationGPIO():
 #Spectrum Animation
 def spectrumAnimation(state):
 	if state:
+		clearAnimationGPIO()
 		GPIO.output(spectrumPin,GPIO.HIGH)
 		print "Spectrum is now activated"
 	else:
+		clearAnimationGPIO()
 		GPIO.output(spectrumPin,GPIO.LOW)
 		print "Spectrum is deactivated"
 
 #Random Color Animation
 def rndAnimation(state):
 	if state:
+		clearAnimationGPIO()
 		GPIO.output(randomPin,GPIO.HIGH)
 		print "Random is now activated"
 	else:
+		clearAnimationGPIO()
 		GPIO.output(spectrumPin,GPIO.LOW)
 		print "Random is deactivated"
 
 #Ring Animation
 def ringAnimation(state):
 	if state:
+		clearAnimationGPIO()
 		GPIO.output(ringPin,GPIO.HIGH)
 		print "Ring is now activated"
 	else:
+		clearAnimationGPIO()
 		GPIO.output(ringPin,GPIO.LOW)
 		print "Ring is deactivated"
-#Bounce animation
-def bounce(state):
-	if state:
-		GPIO.output(bouncePin,GPIO.HIGH)
-	else:
-		GPIO.output(bouncePin,GPIO.LOW)
-		print "bounce is deactivated"
 
 #Method for Red Green Levels
 def rgLevelAnimation(state):
 	if state:
-		GPIO.output(RGLevelPin,GPIO.LOW)
+		clearAnimationGPIO()
+		GPIO.output(RGLevelPin,GPIO.HIGH)
 		print "Red Green Level is now active"
 	else:
+		clearAnimationGPIO()
 		GPIO.output(RGLevelPin,GPIO.LOW)
 		print "Red Green Level is now deactived"
 
 #Method for Red Green Strip
 def rgStripsAnimation(state):
 	if state:
-		GPIO.output(RGStripPin,GPIO.LOW)
+		clearAnimationGPIO()
+		GPIO.output(RGStripPin,GPIO.HIGH)
 		print "Red Green Strips is now active"
 	else:
+		clearAnimationGPIO()
 		GPIO.output(RGStripPin,GPIO.LOW)
 		print "Red Green Strips is now deactived"
 
-#Method to Pause music
-def pause(state):
-	print "in gpio pause method"
+#Method for bounce animation
+def bounce(state):
+	print "in gpio bounce method"
 	#GPIO.output(bouncePin,GPIO.HIGH) if state else GPIO.output(bouncePin,GPIO.LOW)
 	if state:
+		clearAnimationGPIO()
 		GPIO.output(bouncePin,GPIO.HIGH)
 	else:
+		clearAnimationGPIO()
 		GPIO.output(bouncePin,GPIO.LOW)
 	print "Pause pin is now ",state
 
@@ -142,8 +147,12 @@ def playing(state):
 	print "Playing pin is now",state
 
 #Method to shut all the lights on the tree.
-def lightsOff(state):
-	if state:
-		GPIO.output(LEDPin,GPIO.LOW)
+def lightsState(state):
+	print "lightsOff state: ",state
+	if not state:
+		GPIO.output(LEDOffPin,GPIO.LOW)
+		print "LEDOffPin is low"
 	else:
-		GPIO.output(LEDPin,GPIO.HIGH)
+		GPIO.output(LEDOffPin,GPIO.HIGH)
+		clearAnimationGPIO()
+		print "LEDOffPin is high"

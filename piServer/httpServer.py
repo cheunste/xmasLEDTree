@@ -12,10 +12,12 @@ import musicManager
 #CONSTANTS
 folderPath='/home/pi/music/'
 startTime=16
-endTime=22
+endTime=23
 maxQueueItem=10
 currHour=datetime.datetime.now().hour
 currMonth=datetime.datetime.now().month
+
+trackerDict= {"currentAnimation":"SPECTRUM","LEDState":0}
 #Create a queue. This is used to pass commands to the music thread and NOT anything else.
 #maxQueueItem is the max queue item. Change maxQeueuItem if needed 
 musicCommandQueue= Queue.Queue(maxQueueItem)
@@ -29,28 +31,27 @@ def inTimeFrame():
 def LEDOff():
 	while currMonth==11 or currMonth==12:
 		while not inTimeFrame():
-			gpioManager.lightsOff(True)
+			gpioManager.lightsState(True)
 
 	
 #Class that's used for HTTP GET and POST requests. Returns JSON format
 class ledTreeServer(object):
 	exposed=True
-
+	
 	@cherrypy.tools.accept(media='text/plain')
 	@cherrypy.expose
 	@cherrypy.tools.json_in()
-
+	@cherrypy.tools.json_out()
 	def index(self,**kwargs):
 		cherrypy.response.headers['Content-Type']="application/json"
 		jsonInput=cherrypy.request.json
 		data=jsonInput
 
 		returnMessage=''
-	
+		currentAnimation=""
+		LEDState=1
+
 		#print kwargs
-		#data={'pause':0,'mode':''}
-		#return json.dumps(data)
-		rtnMessage= "SUCCESS?!?!?"
 
 		for jsonItem in jsonInput:
 			print "ITEM: ", jsonItem
@@ -58,58 +59,62 @@ class ledTreeServer(object):
 	
 			if jsonItem=="SPECTRUM":
 				print "IN SPECTRUM"
+				trackerDict["currentAnimation"]="SPECTRUM"
 				gpioManager.clearAnimationGPIO()
 				gpioManager.spectrumAnimation(data[jsonItem])
 				returnMessage.join("Spectrum Mode On ")
 
-			if jsonItem=="RING":
+			elif jsonItem=="RING":
 				print "IN RING"
+				trackerDict["currentAnimation"]="RING"
 				gpioManager.clearAnimationGPIO()
 				gpioManager.ringAnimation(data[jsonItem])
 				returnMessage.join("Ring Mode On ")
 
-			if jsonItem=="RANDOM":
+			elif jsonItem=="RANDOM":
 				print "IN RANDOM"
+				trackerDict["currentAnimation"]="RANDOM"
 				gpioManager.clearAnimationGPIO()
 				gpioManager.rndAnimation(data[jsonItem])
 				returnMessage.join("Random Mode On ")
 
-			if jsonItem=="RGSTRIPS":
+			elif jsonItem=="RGSTRIPS":
 				print "IN RGSTRIPS"
+				trackerDict["currentAnimation"]="RGSTRIPS"
 				gpioManager.clearAnimationGPIO()
 				gpioManager.rgStripsAnimation(data[jsonItem])
 				returnMessage.join("RG Strip Mode On ")
 
-			if jsonItem=="RGLEVEL":
+			elif jsonItem=="RGLEVEL":
 				print "IN RGLEVEL"
+				trackerDict["currentAnimation"]="RGLEVEL"
 				gpioManager.clearAnimationGPIO()
 				gpioManager.rgLevelAnimation(data[jsonItem])
 				returnMessage.join("RG Level Mode On ")
 
-			if jsonItem == "LED":
+			elif jsonItem == "LED":
 				print "IN LED"
-				gpioManager.lightsOff(data[jsonItem])
+				trackerDict["LEDState"]=data[jsonItem]
+				gpioManager.lightsState(data[jsonItem])
 				returnMessage.join("LED state changed")
-                        if jsonItem=="BOUNCE":
-                                print "IN BOUNCE"
-                                gpioManager.clearAnimationGPIO()
-                                gpioManager.bounce(data[jsonItem])
-                                returnMessage.join("Bounce Mode On")
 
-			
+			elif jsonItem == "BOUNCE":
+				print "IN BOUNCE"
+				trackerDict["currentAnimation"]="BOUNCE"
+				gpioManager.lightsState(data[jsonItem])
+				returnMessage.join("BOUNCE Mode on")
+
 			#The following items are used to manipulate music and requires a queue
-			if jsonItem=="PAUSE":
+			elif jsonItem=="PAUSE":
 				print "IN PAUSE"
-				gpioManager.pause(True)
 				gpioManager.playing(False)
 				#Add command and state to the queue
 				queueLock.acquire()
 				musicCommandQueue.put(jsonItem)
 				musicCommandQueue.put(data[jsonItem])
 				queueLock.release()
-			if jsonItem=="PLAY":
+			elif jsonItem=="PLAY":
 				print "IN PLAY"
-				gpioManager.pause(False)
 				gpioManager.playing(True)
 				#Add command and state to the queue
 				queueLock.acquire()
@@ -118,14 +123,14 @@ class ledTreeServer(object):
 				queueLock.release()
 
 			#NOTE: Skip and Stop doesn't work
-			if jsonItem=="SKIP":
+			elif jsonItem=="SKIP":
 				print "IN SKIP"
 				#Add command and state to the queue
 				queueLock.acquire()
 				musicCommandQueue.put(jsonItem)
 				musicCommandQueue.put(data[jsonItem])
 				queueLock.release()
-			if jsonItem=="STOP":
+			elif jsonItem=="STOP":
 				print "IN STOP"
 				#Add command and state to the queue
 				queueLock.acquire()
@@ -133,7 +138,16 @@ class ledTreeServer(object):
 				musicCommandQueue.put(data[jsonItem])
 				queueLock.release()
 
+			#This one is only used when the android app wants to get data. This is still in testing
+			elif jsonItem=="FETCH":
+				return {trackerDict['currentAnimation']:1,"LED":trackerDict['LEDState']}
+				return "Here is something...."
 
+			else:
+				print "Something is wrong"
+				returnMessage.join("Error")
+
+		#return rtnMessage
 		return returnMessage
 
 def startServer():
@@ -161,6 +175,7 @@ if __name__=='__main__':
 	pygame.init()
 	pygame.mixer.init(22050,16,2,4096)
 	pygame.mixer.music.set_volume(1.0)
+
 	#Set up GPIO Pin with WiringPi GPIO reference
 	gpioManager.GPIOSetup()
 
@@ -168,14 +183,13 @@ if __name__=='__main__':
 	musicThread=threading.Thread(target=musicManager.musicHandler,args=(musicCommandQueue,queueLock))
 	musicThread.daemon=True
 
-        #Create a thread to monitor system time 
+        #Create a thread to monitor time
         timeThread=threading.Thread(target=LEDOff)
         timeThread.daemon=True
 
 	#Start the two threads
 	musicThread.start()
         timeThread.start()
-	#LEDThread.start()
 
 	#Start the server
 	startServer()
