@@ -1,14 +1,18 @@
 package com.example.work.ledtreeapp;
+
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -29,23 +33,55 @@ public class MainActivity extends Activity {
     private RadioGroup soundGroup, lightsGroup;
     private Spinner animationModeSpinner;
     private static String httpLogger= "HTTPLOGGER";
-    String[] animation={ "Spectrum","Red/Green Strips","Red Green Level","Random LED","Ring"};
+    private EditText ipAddressInput;
+    private EditText portInput;
+    String[] animation={ "Spectrum","Red/Green Strips","Red Green Level","Random LED","Ring","Bounce"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
 
-        //FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+        /* initialize the text fields used for IP address and port */
+        ipAddressInput = (EditText)findViewById(R.id.ipAddressText);
+        ipAddressInput.setText("192.168.1.14");
+        portInput=(EditText)findViewById(R.id.portText);
+        portInput.setText("9000");
+
+        //event listeners for the edittext.
+        ipAddressInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        portInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         /* initialize the sound group*/
         soundGroup = (RadioGroup)findViewById(R.id.soundGroup);
@@ -84,11 +120,11 @@ public class MainActivity extends Activity {
                 if (null != rb && checkedId > -1) {
                     if(checkedId==R.id.LEDOn){
                         Toast.makeText(MainActivity.this, "Lights are on", Toast.LENGTH_SHORT).show();
-                        jsonCreator("LED", 1);
+                        jsonCreator("LED", 0);
                     }
                     if(checkedId==R.id.LEDOff){
                         Toast.makeText(MainActivity.this, "Lights are off", Toast.LENGTH_SHORT).show();
-                        jsonCreator("LED", 0);
+                        jsonCreator("LED", 1);
                     }
                 }
 
@@ -132,6 +168,8 @@ public class MainActivity extends Activity {
                                 break;
                             //Ring
                             case 4:jsonText= "RING";
+                                break;
+                            case 5:jsonText="BOUNCE";
                                 break;
                         }
                         int value=1;
@@ -178,7 +216,7 @@ public class MainActivity extends Activity {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put(jsonParameter, value);
 
-            new sendRequest().execute(jsonObject.toString());
+            new sendRequest().execute(jsonObject.toString(),ipAddressInput.getText().toString(),portInput.getText().toString());
             //sendRequest(jsonObject.toString());
             Toast.makeText(MainActivity.this, "Sent to sendRequest()", Toast.LENGTH_SHORT).show();
         }
@@ -192,10 +230,17 @@ public class MainActivity extends Activity {
 
         protected Void doInBackground(String... params) {
             //TODO: Get this to work
-            String address = "http://192.168.1.14:9000/";
+            //String address = "http://192.168.1.14:9000/";
 //            String address = "http://192.168.202.89:9000/";
             String data =params[0].toString();
             Log.v(httpLogger,"Data of params[0] is: "+data);
+
+            String ipAddress=params[1].toString();
+            Log.v(httpLogger,"Data of params[1] is: "+ipAddress);
+            String port=params[2].toString();
+            Log.v(httpLogger,"Data of params[2] is: "+port);
+            String address="http://"+ipAddress+":"+port+"/";
+            Log.v(httpLogger,"IP Address app is reaching is: "+address);
             //Toast.makeText(MainActivity.this, "JSON OBJECT: "+jsonObject, Toast.LENGTH_SHORT).show();
             HttpURLConnection urlConnection=null;
             DataOutputStream outputStream;

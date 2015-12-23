@@ -94,4 +94,31 @@
             android:buttonTint="#FF5252"
             android:textColor="#727272" />
     </RadioGroup>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="35dp"
+        android:textColor="#212121"
+        android:text="IP Address" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ipAddressText"
+        android:inputType="numberDecimal"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="35dp"
+        android:textColor="#212121"
+        android:text="Port:" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/portText"
+        android:inputType="numberDecimal"
+        android:layout_gravity="center_horizontal" />
 </LinearLayout>
